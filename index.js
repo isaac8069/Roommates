@@ -6,11 +6,14 @@ const session = require('express-session')
 const passport = require('./config/ppConfig')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
-
+let db = require('./models')
 
 // views (ejs and layouts) set up
 app.set('view engine', 'ejs')
 app.use(ejsLayouts)
+
+//
+app.use(express.static(__dirname + '/public/'))
 
 // body parser middelware
 app.use(express.urlencoded({extended:false}))
@@ -37,8 +40,20 @@ app.use((req, res, next) => {
     next()
 })
 
+//GET - display all apartments
+app.get('/', (req,res) => {
+    db.apartment.findAll({
+
+    }).then((apartments) => {
+        res.render('', { apartments: apartments})
+    }).catch((error) => {
+        console.log(error)
+        res.status(200).render
+    })
+})
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
+app.use('apartments', require('./controllers/apartments'))
 
 
 // home route
