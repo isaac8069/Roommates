@@ -1,6 +1,15 @@
 'use strict'
+const {
+  Model
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  const apartment = sequelize.define('apartment', {
+  class apartment extends Model {
+
+    static associate(models) {
+      models.apartment.belongsTo(models.user, {through: "userApartment"})
+    }
+  }
+  apartment.init({
     title: DataTypes.STRING,
     rent: DataTypes.INTEGER,
     description: DataTypes.STRING,
@@ -9,13 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     bathrooms: DataTypes.INTEGER,
     amenities: DataTypes.STRING,
     roomates: DataTypes.INTEGER,
-    aboutLister: DataTypes.STRING
-  }, {})
-  apartment.associate = function(models) {
-    // associations can be defined here
-    models.apartment.belongsTo(models.users)
-    
-    models.apartment.hasMany(models.roommates)
-  }
+    userId: DataTypes.INTEGER
+  }, {
+  sequelize,
+  modelName: 'apartment'
+  })
   return apartment
 }

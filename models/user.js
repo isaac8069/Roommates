@@ -12,11 +12,42 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      models.user.hasMany(models.tag, {through:"userTag"})
+      models.user.belongsTo(models.apartment, {through: "userApartment"})
     }
   };
   user.init({
-    name: {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [2, 25],
+          msg: 'Name must be 2-25 characters long.'
+        }
+      }
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [2, 25],
+          msg: 'Name must be 2-25 characters long.'
+        }
+      }
+    },
+    age: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: {
+          args: [],
+          msg: 'Name must be 2-25 characters long.'
+        }
+      }
+    },
+    occupation: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -46,6 +77,9 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Password must be between 8 and 99 characters.'
         }
       }
+    },
+    apartmentId: {
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,
@@ -59,19 +93,6 @@ module.exports = (sequelize, DataTypes) => {
       pendingUser.password = hashedPassword
     })
   })
-
-  // ALTERNATIVE TIMING OPTION FOR ABOVE HOOK
-  // user.addHook('beforeCreate', (pendingUser, options)=>{
-  //   let hashedPassword = bcrypt.hashSync(pendingUser.password, 10)
-  //   console.log(`${pendingUser.password} became ---> ${hashedPassword}`)
-  //   pendingUser.password = hashedPassword
-  // })
-
-  // REMOVING AND PUTTING THIS ON PPCONFIG LINE 71
-  // user.prototype.validPassword = async (passwordInput) => {
-  //   let match = await bcrypt.compare(passwordInput, this.password)
-  //   return match
-  // }
 
   return user;
 

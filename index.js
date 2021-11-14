@@ -1,7 +1,7 @@
 require('dotenv').config()
-const express = require('express')
-const app = express()
-const ejsLayouts = require('express-ejs-layouts')
+let express = require('express')
+let app = express()
+let ejsLayouts = require('express-ejs-layouts')
 const session = require('express-session')
 const passport = require('./config/ppConfig')
 const flash = require('connect-flash')
@@ -53,7 +53,9 @@ app.get('/', (req,res) => {
 })
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
-app.use('apartments', require('./controllers/apartments'))
+app.use('/apartments', require('./controllers/apartments'))
+app.use('/users', require('./controllers/users'))
+app.use('/tags', require('./controllers/tags'))
 
 
 // home route
@@ -71,3 +73,5 @@ app.listen(3000, ()=>{
     console.log(`process.env.SUPER_SECRET_SECRET ${process.env.SUPER_SECRET_SECRET}`)
     console.log("auth_practice running on port 3000")
 })
+
+module.exports = server

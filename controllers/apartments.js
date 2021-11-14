@@ -1,7 +1,7 @@
 let experess = require('express')
 let router = express.Router()
-let db = require('../config/database')
-const apartment = require('../models/apartments')
+let db = require('../models')
+const apartment = require('../models/apartment')
 
 // Get apartment - display all apartments
 router.get('/', (req, res)=> {
@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
             res.redirect('/apartments')
         })
         .catch((error) => {
-            res.status(400).render('......')
+            res.status(200).render
         })
     })
 
@@ -39,5 +39,17 @@ router.get('/new', (req, res) => {
     res.render('apartmets/new')
 })
 
+// GET /apartments/:id - display a specific author and their posts
+router.get('/:id', (req, res) => {
+    db.apartment.findOne({
+      include: [db.tag],
+      where: {id: req.params.id}
+    }).then((apartment) => {
+      res.render('apartments/show', { apartment: apartment })
+    }).catch((error) => {
+      console.log(error)
+      res.status(200).render
+    })
+  })
 
 module.exports = router
