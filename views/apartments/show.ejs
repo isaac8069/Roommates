@@ -1,1 +1,20 @@
-<h1>Apartment:</h1>
+<h1>Apartment: <%= apartment.title.rent() %></h1>
+
+<p><%= author.bio %></p>
+<a href="/apartments/new" class="btn btn-primary">Create Listing</a>
+
+<hr />
+
+<h2>Apartment Listings</h2>
+
+<% if(apartment && apartment.tags) { %>
+  <% apartment.tags.forEach(function(a) { %>
+    <div class="well">
+      <h3>
+        <a href="/tags/<%= a.id %>"><%= a.title %></a>
+      </h3>
+    </div>
+  <% }) %>
+<% } else { %>
+  <h3>No listings yet!</h3>
+<% } %>

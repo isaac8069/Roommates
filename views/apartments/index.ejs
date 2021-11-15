@@ -1,0 +1,17 @@
+<h1>Apartments</h1>
+
+<% apartments.forEach(function(apartment) { %>
+  <div class="well">
+    <h2>
+      <a href="/apartments/<%= apartment.id %>">
+        <%= apartment.title.rent() %>
+      </a>
+    </h2>
+  </div>
+<% }) %>
+
+<a href="/auth/signup">Sign Up</a>
+
+<hr />
+
+<a href="/">&larr; Back Home</a>

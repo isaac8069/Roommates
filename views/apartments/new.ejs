@@ -6,23 +6,43 @@
             <div class='form-group'>
                 <label for='title'>Title</label>
                 <input type='text' name='title' id='title' class='form-box' placeholder="eg. Bedroom available in an amazing 2bedroom apartment"
-                maxlength="200" required>
+                maxlength="200" values={{title}} required>
             </div>
-            
+
             <div>
                 <div class='form-group'>
                 <label for='rent'>Rent</label>
-                <input type="number" name="rent" id="rent" class="form-box" placeholder="eg. $1500" required>
+                <input type="number" name="rent" id="rent" class="form-box" placeholder="eg. 1500" values={{rent}} required>
             </div>
             <div>
                 <label for='description'>Description</label>
                 <textarea name='description' id='description' class='form-box' placeholder="eg. Modern architecture that emphasizes space, light exposure, and luxury interiors. Includes a 24-hour gym, laundry, great rooftop, elevator, floor to ceiling windows, and balcony in unit! The bedroom available in this apartment also has it's own on en-suite half bath!"
-                rows="10" required></textarea>
+                rows="10" values={{description}} required></textarea>
             </div>
             <div>
                 <label for='location'>Location</label>
                 <input type='text' name='location' id='location' class='form-box' placeholder="eg. Brooklyn, NY"
-                required>
+                value={{location}} required>
+            </div>
+            <div>
+                <label for='bedroom'>Bedrooms</label>
+                <input type='number' name='bedroom' id='bedroom' class='form-box' placeholder="eg. 3"
+                value={{bedroom}} required>
+            </div>
+            <div>
+                <label for='bathroom'>Bathrooms</label>
+                <input type='number' name='bathroom' id='bathroom' class='form-box' placeholder="eg. 2.5"
+                value={{bathroom}} required>
+            </div>
+            <div>
+                <label for='amenity'>Amenities</label>
+                <input type='text' name='amenity' id='amenity' class='form-box' placeholder="eg. washer and dryer in unit, 24-hour gym, doorman, pool"
+                value={{amenity}} required>
+            </div>
+            <div>
+                <label for='roommate'>Number of Current Roommates</label>
+                <input type='text' name='roommate' id='roommate' class='form-box' placeholder="eg. 2"
+                value={{roommate}} required>
             </div>
 
             <input type="submit" class="btn btn-primary">

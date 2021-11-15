@@ -14,10 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     rent: DataTypes.INTEGER,
     description: DataTypes.STRING,
     location: DataTypes.STRING,
-    bedrooms: DataTypes.INTEGER,
-    bathrooms: DataTypes.INTEGER,
-    amenities: DataTypes.STRING,
-    roomates: DataTypes.INTEGER,
+    bedroom: DataTypes.INTEGER,
+    bathroom: DataTypes.INTEGER,
+    amenity: DataTypes.STRING,
+    roommate: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
   }, {
   sequelize,

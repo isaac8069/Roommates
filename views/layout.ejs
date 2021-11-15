@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Roommates NYC</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
     <header>
-        <h1>Roomates NYC</h1>
+        <h1>Roommates NYC</h1>
         <nav>
             <ul>
               <% if (!currentUser) { %>
@@ -17,11 +18,16 @@
               <% } else { %>
                 <li><a href="/auth/logout">Logout</a></li>
                 <li><a href="/profile">Profile</a></li>
+                <li><a href="/apartments">All Listings</a></li>
+                <li><a href="/apartments/new">Create Listing</a></li>
+                <li><a href="/faves">Favorites</a></li>
+                <li><a href="/">Home</a></li>
               <% } %>
             </ul>
           </nav>
     </header>
     <%- include('partials/alerts') %>
+    <%- include('partials/navbar') %>
     <%- body %> 
 </body>
 </html>

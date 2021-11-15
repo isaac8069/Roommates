@@ -40,10 +40,10 @@ app.use((req, res, next) => {
     next()
 })
 
-//GET - display all apartments
+//GET - display all apartments and their tags
 app.get('/', (req,res) => {
     db.apartment.findAll({
-
+        include: [db.tag]
     }).then((apartments) => {
         res.render('', { apartments: apartments})
     }).catch((error) => {

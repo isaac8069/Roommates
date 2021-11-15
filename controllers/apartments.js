@@ -1,7 +1,9 @@
-let experess = require('express')
-let router = express.Router()
+let express = require('express')
+const router = express.Router()
 let db = require('../models')
 const apartment = require('../models/apartment')
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 
 // Get apartment - display all apartments
 router.get('/', (req, res)=> {
@@ -20,11 +22,10 @@ router.post('/', (req, res) => {
         rent: req.body.rent,
         description: req.body.description,
         location: req.body.location,
-        bedrooms: req.body.bedrooms,
-        bathrooms: req.body.bathrooms,
-        amenities: req.body.amenities,
-        roommates: req.body.roomates,
-        aboutLister: req.body.aboutLister
+        bedroom: req.body.bedroom,
+        bathroom: req.body.bathroom,
+        amenity: req.body.amenity,
+        roommate: req.body.roommate
         })
         .then((apartment) => {
             res.redirect('/apartments')
@@ -32,7 +33,7 @@ router.post('/', (req, res) => {
         .catch((error) => {
             res.status(200).render
         })
-    })
+    })    
 
 // GET: /apartments/new - display form for creating a new apartment listing
 router.get('/new', (req, res) => {
@@ -52,4 +53,14 @@ router.get('/:id', (req, res) => {
     })
   })
 
+  // Search for apartments
+  router.get('/search', (req, res) => {
+      let {term} = req.query
+      //Make lowerCase
+      term = term.toLowerCase()
+
+    apartment.findAll({ where: { location: { [Op.like]: '%' + term + '%' }}})
+    .then(apartments => res.render('apartments', { apartments }))
+    .catch(error => console.log(error))
+  })
 module.exports = router
