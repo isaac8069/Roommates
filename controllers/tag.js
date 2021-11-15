@@ -1,6 +1,5 @@
 let express = require('express')
 let db = require('../models')
-const tag = require('../models/tag')
 let router = express.Router()
 
 // POST /tags - create a new post
@@ -34,7 +33,7 @@ router.get('/:id', (req, res) => {
     where: { id: req.params.id },
   })
   .then((tag) => {
-    if (!tag) throw Error()
+    // if (!tag) throw Error()
     console.log('these are the tags', tag)
     res.render('tags/show', { tag: tag })
   })

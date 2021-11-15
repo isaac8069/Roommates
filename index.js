@@ -42,8 +42,8 @@ app.use((req, res, next) => {
 
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
-app.use('/apartments', require('./controllers/apartments'))
-app.use('/tags', require('./controllers/tags'))
+app.use('/apartment', require('./controllers/apartment'))
+app.use('/tag', require('./controllers/tag'))
 
 //GET - display all apartments and their tags
 // app.get('/', (req,res) => {
