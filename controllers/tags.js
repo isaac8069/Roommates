@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
     res.redirect('/')
   })
   .catch((error) => {
-    res.status(200).render
+    res.status(200).send('post tags')
   })
 })
 
@@ -24,7 +24,7 @@ router.get('/new', (req, res) => {
     res.render('tags/new', { tags: tags })
   })
   .catch((error) => {
-    res.status(200).render
+    res.status(200).send('new tags')
   })
 })
 
@@ -40,7 +40,7 @@ router.get('/:id', (req, res) => {
   })
   .catch((error) => {
     console.log(error)
-    res.status(200).render
+    res.status(200).send('find tag')
   })
 })
 

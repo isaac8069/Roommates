@@ -40,23 +40,22 @@ app.use((req, res, next) => {
     next()
 })
 
-//GET - display all apartments and their tags
-app.get('/', (req,res) => {
-    db.apartment.findAll({
-        include: [db.tag]
-    }).then((apartments) => {
-        res.render('', { apartments: apartments})
-    }).catch((error) => {
-        console.log(error)
-        res.status(200).render
-    })
-})
 // controllers middleware 
 app.use('/auth', require('./controllers/auth'))
 app.use('/apartments', require('./controllers/apartments'))
-app.use('/users', require('./controllers/users'))
 app.use('/tags', require('./controllers/tags'))
 
+//GET - display all apartments and their tags
+// app.get('/', (req,res) => {
+//     db.apartment.findAll({
+//         include: [db.tag]
+//     }).then((apartments) => {
+//         res.render('', { apartments: apartments})
+//     }).catch((error) => {
+//         console.log(error)
+//         res.status(200).send('display all tags')
+//     })
+// })
 
 // home route
 app.get('/', (req, res)=>{
@@ -74,4 +73,4 @@ app.listen(3000, ()=>{
     console.log("auth_practice running on port 3000")
 })
 
-module.exports = server
+// module.exports = server
