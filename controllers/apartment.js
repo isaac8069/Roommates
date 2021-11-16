@@ -20,29 +20,30 @@ let cloudinary = require('cloudinary').v2
 // Get apartment - display all apartments
 router.get('/', (req, res)=> {
     db.apartment.findAll()
-    .then((apartment) => {
-        res.render('apartment', { apartment })
+    .then((apartments) => {
+        res.render('apartments/index', { apartments })
     })
     .catch(err => console.log(err))
-    res.status(200).send('route successful')
+    // res.status(200).send('route successful')
 })
 
 
 //POST an apartment
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
     console.log('where are my apartments')
     db.apartment.create({
         title: req.body.title,
         rent: req.body.rent,
         description: req.body.description,
         location: req.body.location,
-        bedroom: req.body.bedroom,
-        bathroom: req.body.bathroom,
-        amenity: req.body.amenity,
-        roommate: req.body.roommate
+        bedrooms: req.body.bedroom,
+        bathrooms: req.body.bathroom,
+        amenities: req.body.amenity,
+        roommates: req.body.roommate,
+        userId: req.body.userId
         })
     .then((apartment) => {
-        res.redirect('/apartments/new')
+        res.redirect('/apartment')
     })
     .catch((error) => {
         res.status(200).send('Post an apartment')
@@ -52,8 +53,8 @@ router.post('/', (req, res) => {
 // GET: /apartments/new - display form for creating a new apartment listing
 router.get('/new', (req, res) => {
     db.apartment.findAll()
-    .then((apartments) => {
-        res.render('apartments/new', {apartments: apartments})
+    .then((apartment) => {
+        res.render('apartments/new', {apartment: apartment})
     })
     .catch((error) => {
         res.status(200).send('new apartments')
@@ -80,7 +81,7 @@ router.get('/:id', (req, res) => {
     //   term = term.toLowerCase()
     console.log(req.query)
     db.apartment.findAll({ where: { location: req.query.location}})
-    .then(apartments => res.render('apartments', { apartments }))
+    .then(apartment => res.render('apartments', { apartment }))
     .catch(error => console.log(error))
   })
 

@@ -4,12 +4,13 @@ const db = require('../models')
 const apartment = require('../models/apartment')
 const sequelize = require('sequelize')
 
+// I want to a person favorites to be associated to their userId
 
 // we need an index route that will show all faves
 router.get('/', (req, res) => {
-    db.favorite.findAll()
+    db.apartment.findAll()
         .then(faves => {
-            res.render('apartments/fave', { results: faves })
+            res.render('apartments/fave', { apartment: faves })
         })
         .catch(error => {
             console.error
@@ -23,7 +24,7 @@ router.get('/', (req, res) => {
 router.post('/addFave', (req, res) => {
     const data = JSON.parse(JSON.stringify(req.body))
     console.log('this is data', data)
-    db.favorite.create({
+    db.apartment.create({
         title: data.title,
         rent: data.rent
     })
