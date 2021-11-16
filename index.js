@@ -7,6 +7,9 @@ const passport = require('./config/ppConfig')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
 let db = require('./models')
+let cloudinary = require('cloudinary')
+const axios = require('axios')
+const fs = require('fs')
 
 // views (ejs and layouts) set up
 app.set('view engine', 'ejs')
@@ -45,18 +48,6 @@ app.use('/auth', require('./controllers/auth'))
 app.use('/apartment', require('./controllers/apartment'))
 app.use('/tag', require('./controllers/tag'))
 
-//GET - display all apartments and their tags
-// app.get('/', (req,res) => {
-//     db.apartment.findAll({
-//         include: [db.tag]
-//     }).then((apartments) => {
-//         res.render('', { apartments: apartments})
-//     }).catch((error) => {
-//         console.log(error)
-//         res.status(200).send('display all tags')
-//     })
-// })
-
 // home route
 app.get('/', (req, res)=>{
     res.render('home')
@@ -72,5 +63,3 @@ app.listen(3000, ()=>{
     console.log(`process.env.SUPER_SECRET_SECRET ${process.env.SUPER_SECRET_SECRET}`)
     console.log("auth_practice running on port 3000")
 })
-
-// module.exports = server

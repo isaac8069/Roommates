@@ -8,10 +8,14 @@ router.get('/signup', (req, res)=>{
 })
 
 router.post('/signup', (req, res)=>{
+    console.log(req.body)
     db.user.findOrCreate({
         where: {email: req.body.email},
         defaults: {
-            name: req.body.name,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            age: req.body.age,
+            email: req.body.email,
             password: req.body.password
         }
     })

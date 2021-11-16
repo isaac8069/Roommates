@@ -1,7 +1,6 @@
 <section id='add' class='container'>
     <div class='form-wrap'>
         <h1>Add An Apartment Listing</h1>
-        <p>Your contact email will be listed</p>
         <form action="/apartments" method="POST">
             <div class='form-group'>
                 <label for='title'>Title</label>
@@ -15,8 +14,8 @@
                 <input type="number" name="rent" id="rent" class="form-box" placeholder="eg. 1500" values={{rent}} required>
             </div>
             <div>
-                <label for='description'>Description</label>
-                <textarea name='description' id='description' class='form-box' placeholder="eg. Modern architecture that emphasizes space, light exposure, and luxury interiors. Includes a 24-hour gym, laundry, great rooftop, elevator, floor to ceiling windows, and balcony in unit! The bedroom available in this apartment also has it's own on en-suite half bath!"
+                <label for='description'>About Listing</label>
+                <textarea type="text" name='description' id='description' class='form-box' placeholder="eg. Modern architecture that emphasizes space, light exposure, and luxury interiors. Includes a 24-hour gym, laundry, great rooftop, elevator, floor to ceiling windows, and balcony in unit! The bedroom available in this apartment also has it's own on en-suite half bath!"
                 rows="10" values={{description}} required></textarea>
             </div>
             <div>

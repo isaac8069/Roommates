@@ -1,6 +1,7 @@
 let express = require('express')
 let db = require('../models')
 let router = express.Router()
+const axios = require('axios')
 
 // POST /tags - create a new post
 router.post('/', (req, res) => {
@@ -44,20 +45,20 @@ router.get('/:id', (req, res) => {
 })
 
 //POST ==> /tags/:id:comments --> this willl add a new comment
-//req.body is coming from the form in show.ejs
-//req.params is referring the url
-// router.post('/:id/comments', (req,res) => {
-//   db.comment.create({
-//     name: req.body.name,
-//     tagId: req.params.id
-//   })
-//   .then(resPost => {
-//     console.log('created tag', resPost)
-//     res.redirect(`/tags/${req.params.id}`)
-//   })
-//   .catch(err => {
-//     res.status(200).render
-//   })
-// })
+// req.body is coming from the form in show.ejs
+// req.params is referring the url
+router.post('/:id/comments', (req,res) => {
+  db.comment.create({
+    name: req.body.name,
+    tagId: req.params.id
+  })
+  .then(resPost => {
+    console.log('created tag', resPost)
+    res.redirect(`/tags/${req.params.id}`)
+  })
+  .catch(err => {
+    res.status(200).render
+  })
+})
 
 module.exports = router

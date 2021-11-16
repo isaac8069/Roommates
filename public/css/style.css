@@ -1,0 +1,6 @@
+nav {
+    grid-area: header;
+    width: 100%;
+    place-self: center stretch;
+    justify-self: center;
+}

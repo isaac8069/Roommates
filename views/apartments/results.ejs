@@ -1,0 +1,15 @@
+<%if(apartment===undefined) {%>
+    <h3>No Favorites Found</h3>
+    <small>check your spelling and punctuation and try again</small>
+    <%} else {%>
+        <ul>
+            <%apartments.forEach(function(apartment) {%>
+                <li>
+                    <a href="/apartment/<%=apartment.title%>">
+                        <%=apartment.title%>
+                    </a>
+                    <small>(<%=apartment.rent%>)</small>
+                </li>
+                <%})%>
+        </ul>
+        <%}%>
