@@ -1,0 +1,17 @@
+<h1>Tags</h1>
+
+<% tags.forEach(function(tag) { %>
+  <div class="well">
+    <h2>
+      <a href="/tags/<%= tag.id %>">
+        <%= tag.name %>
+      </a>
+    </h2>
+  </div>
+<% }) %>
+
+<a href="/auth/signup">Sign Up</a>
+
+<hr />
+
+<a href="/">&larr; Back Home</a>

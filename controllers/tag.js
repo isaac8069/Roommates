@@ -3,30 +3,34 @@ let db = require('../models')
 let router = express.Router()
 const axios = require('axios')
 
+
+// GET /tags/new - display form for creating new tags
+router.get('/', (req, res) => {
+  db.tag.findAll()
+  .then((tags) => {
+    res.render('tags/index', { tags })
+  })
+  .catch((error) => {
+    res.status(200).send('new tags')
+  })
+})
+
+
 // POST /tags - create a new post
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
   db.tag.create({
     name: req.body.name,
     tagId: req.body.tagId
   })
-  .then((post) => {
-    res.redirect('/')
+  .then((tag) => {
+    res.redirect('/tag')
   })
   .catch((error) => {
     res.status(200).send('post tags')
   })
 })
 
-// GET /tags/new - display form for creating new tags
-router.get('/new', (req, res) => {
-  db.tag.findAll()
-  .then((tags) => {
-    res.render('tags/new', { tags: tags })
-  })
-  .catch((error) => {
-    res.status(200).send('new tags')
-  })
-})
+
 
 // GET /tags/:id - display a specific post and its tag
 router.get('/:id', (req, res) => {

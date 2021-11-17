@@ -10,6 +10,7 @@ let db = require('./models')
 let cloudinary = require('cloudinary')
 const axios = require('axios')
 const fs = require('fs')
+const methodOverride = require('method-override');
 
 // views (ejs and layouts) set up
 app.set('view engine', 'ejs')
@@ -47,6 +48,7 @@ app.use((req, res, next) => {
 app.use('/auth', require('./controllers/auth'))
 app.use('/apartment', require('./controllers/apartment'))
 app.use('/tag', require('./controllers/tag'))
+app.use(methodOverride('_method'));
 
 // home route
 app.get('/', (req, res)=>{
