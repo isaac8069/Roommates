@@ -6,14 +6,21 @@ const apartment = require('../models/apartment')
 const sequelize = require('sequelize')
 const Op = sequelize.Op
 const methodOverride = require('method-override');
-let cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary').v2
 
-// this is our results route aka controller
-// router.get('/apartment/new', function (req, res) {
-//     cloudinary.v2.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-//   { public_id: "olympic_flag" }, 
-//   function(error, result) {console.log(result); });
-// })
+// CLOUDINARY  UPLOAD
+cloudinary.uploader
+.upload(".assets/images", {
+  resource_type: "image",
+})
+.then((result) => {
+  console.log("success", JSON.stringify(result, null, 2))
+})
+.catch((error) => {
+  console.log(error)
+})
+
+cloudinary.uploader.upload("my_image.jpg", function(error, result) {console.log(result, error)});
 
 
 
@@ -47,18 +54,30 @@ router.post('/new', (req, res) => {
     location: req.body.location,
     bedrooms: req.body.bedrooms,
     bathrooms: req.body.bathrooms,
-    amenities: req.body.amenites,
+    amenities: req.body.amenities,
     roommates: req.body.roommates,
     userId: req.body.userId
   })
     .then((apartment) => {
-      res.redirect('/apartment')
+      res.redirect('/apartment', { apartment })
     })
     .catch((error) => {
       // res.status(200).send('Post an apartment')
     })
 })
 
+// PUT - ADD IMAGE
+// router.put('image/:id', (req, res) => {
+//   db.apartmentfindOne({
+//     where: { id: req.params.id },
+//   })
+//   .then((apartment) => {
+//     apartment.update({
+//       image: req.body.image
+//     })
+//   })
+//   res.redirect('/apartment')
+// })
 // UPDATE AN APARTMENT LISTING
 // router.put('/edit/:id', isLoggedIn, (req, res) => {
 //   db.apartment.findOne({
@@ -98,17 +117,17 @@ router.delete('/:id', (req, res) => {
 
 
 // GET AN APARTMENT USING ID - display a specific apartment and their tags
-// router.get('/:id', (req, res) => {
-//   db.apartment.findOne({
-//     // include: [db.tag],
-//     where: { id: req.params.id }
-//   }).then((apartment) => {
-//     res.render('apartments/show', { apartment: apartment })
-//   }).catch((error) => {
-//     console.log(error)
-//     res.send('Apartment ID not found')
-//   })
-// })
+router.get('/:id', (req, res) => {
+  db.apartment.findOne({
+    // include: [db.tag],
+    where: { id: req.params.id }
+  }).then((apartment) => {
+    res.render('apartments/show', { apartment: apartment })
+  }).catch((error) => {
+    console.log(error)
+    res.send('APARTMENT ID NOT FOUND')
+  })
+})
 
 // SEARCH FOR AN APARTMENT USING LOCATION
 router.get('/search', (req, res) => {
@@ -124,7 +143,7 @@ router.get('/search', (req, res) => {
     res.render('apartments/result', { apartment: apartment })
   }).catch((error) => {
     console.log(error)
-    res.send('not working')
+    res.send('RESULTS NOT RENDERING')
   })
 })
 

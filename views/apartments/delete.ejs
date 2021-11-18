@@ -5,7 +5,7 @@
             <%= apartment.title %>
         </a>
     </h3>
-    <form action="/faves/<%= apartment.id %>?_method=DELETE" method="post">
+    <form action="/apartment/<%= apartment.id %>?_method=DELETE" method="post">
         <button type="submit" class="btn btn-danger">Remove From Faves</button>
     </form>
     <%})%>
