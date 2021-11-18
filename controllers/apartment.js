@@ -6,29 +6,9 @@ const apartment = require('../models/apartment')
 const sequelize = require('sequelize')
 const Op = sequelize.Op
 const methodOverride = require('method-override');
-const cloudinary = require('cloudinary').v2
+const cloudinary = require('cloudinary')
 const multer = require('multer')
 const upload = multer({ dest: './uploads/' })
-
-// CLOUDINARY  UPLOAD
-cloudinary.uploader
-.upload(".assets/images", {
-  resource_type: "image",
-})
-.then((result) => {
-  console.log("success", JSON.stringify(result, null, 2))
-})
-.catch((error) => {
-  console.log(error)
-})
-
-cloudinary.uploader.upload("my_image.jpg", function(error, result) {console.log(result, error)});
-
-router.post('/', upload.single('myFile'), function(req, res) {
-  cloudinary.uploader.upload(req.file.path, function(result) {
-    res.send(result);
-  });
-});
 
 
 // GET ALL APARTMENTS - ALL LISTINGS
@@ -73,6 +53,15 @@ router.post('/new', (req, res) => {
     })
 })
 
+// CLOUDINARY  UPLOAD
+
+router.put('/', upload.single('myFile'), function(req, res) {
+  cloudinary.uploader.upload(req.file.path, function(result) {
+    console.log(result)
+    console.log(result.url)
+    res.send(result);
+  });
+});
 // PUT - ADD IMAGE
 // router.put('image/:id', (req, res) => {
 //   db.apartmentfindOne({
@@ -136,22 +125,22 @@ router.get('/:id', (req, res) => {
 })
 
 // UPDATE AN APARTMENT LISTING
-// router.put('/edit/:id', isLoggedIn, (req, res) => {
-//   db.apartment.findOne({
-//     where: { id: req.params.id },
-//   })
-//     .then((apartment) => {
-//       apartment.update({
-//         title: req.body.title,
-//         rent: req.body.rent,
-//         description: req.body.description,
-//         amenities: req.body.amenity,
-//         roommates: req.body.roommate,
-//         userId: res.locals.currentUser.id
-//       })
-//     })
-//   res.redirect('/apartment')
-// })
+router.put('/edit/:id', isLoggedIn, (req, res) => {
+  db.apartment.findOne({
+    where: { id: req.params.id },
+  })
+    .then((apartment) => {
+      apartment.update({
+        title: req.body.title,
+        rent: req.body.rent,
+        description: req.body.description,
+        amenities: req.body.amenity,
+        roommates: req.body.roommate,
+        userId: res.locals.currentUser.id
+      })
+    })
+  res.redirect('/apartment')
+})
 
 // FAVORITE APARTMENTS
 // router.get('/:id', (req, res) => {
