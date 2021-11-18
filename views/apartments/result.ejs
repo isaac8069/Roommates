@@ -1,21 +1,20 @@
 <!-- SEARCH RESULTS -->
-
 <h1>SEARCH RESULTS</h1>
 
 
-<!-- <%if(apartments===undefined) {%>
+ <%if(!apartments) {%>
     <h3>No Results Found</h3>
     <small>check your spelling and punctuation and try again</small>
     <%} else {%>
         <ul>
             <%apartments.forEach(function(apartment) {%>
                 <li>
-                    <a href="/apartment/<%=apartment.title%>">
+                    <a href="/apartment/<%=apartment.id%>">
                         <%=apartment.title%>
                     </a>
-                    <small>(<%=apartment.rent%>)</small>
-                    <small>(<%=apartment.location%>)</small>
+                    <small>$<%=apartment.rent%></small>
+                    <small><%=apartment.location%></small>
                 </li>
                 <%})%>
         </ul>
-        <%}%> -->
+        <%}%>

@@ -7,9 +7,11 @@ const passport = require('./config/ppConfig')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
 let db = require('./models')
-let cloudinary = require('cloudinary')
+const cloudinary = require('cloudinary').v2
+const multer = require('multer')
+const upload = multer({ dest: './uploads/' })
 const axios = require('axios')
-const methodOverride = require('method-override');
+const methodOverride = require('method-override')
 
 // views (ejs and layouts) set up
 app.set('view engine', 'ejs')
@@ -47,7 +49,7 @@ app.use((req, res, next) => {
 app.use('/auth', require('./controllers/auth'))
 app.use('/apartment', require('./controllers/apartment'))
 app.use('/tag', require('./controllers/tag'))
-app.use(methodOverride('_method'));
+app.use(methodOverride('_method'))
 
 // home route
 app.get('/', (req, res)=>{

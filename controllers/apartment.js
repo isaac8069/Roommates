@@ -7,6 +7,8 @@ const sequelize = require('sequelize')
 const Op = sequelize.Op
 const methodOverride = require('method-override');
 const cloudinary = require('cloudinary').v2
+const multer = require('multer')
+const upload = multer({ dest: './uploads/' })
 
 // CLOUDINARY  UPLOAD
 cloudinary.uploader
@@ -22,6 +24,11 @@ cloudinary.uploader
 
 cloudinary.uploader.upload("my_image.jpg", function(error, result) {console.log(result, error)});
 
+router.post('/', upload.single('myFile'), function(req, res) {
+  cloudinary.uploader.upload(req.file.path, function(result) {
+    res.send(result);
+  });
+});
 
 
 // GET ALL APARTMENTS - ALL LISTINGS
@@ -59,7 +66,7 @@ router.post('/new', (req, res) => {
     userId: req.body.userId
   })
     .then((apartment) => {
-      res.redirect('/apartment', { apartment })
+      res.redirect('/apartment')
     })
     .catch((error) => {
       // res.status(200).send('Post an apartment')
@@ -76,23 +83,6 @@ router.post('/new', (req, res) => {
 //       image: req.body.image
 //     })
 //   })
-//   res.redirect('/apartment')
-// })
-// UPDATE AN APARTMENT LISTING
-// router.put('/edit/:id', isLoggedIn, (req, res) => {
-//   db.apartment.findOne({
-//     where: { id: req.params.id },
-//   })
-//     .then((apartment) => {
-//       apartment.update({
-//         title: req.body.title,
-//         rent: req.body.rent,
-//         description: req.body.description,
-//         amenities: req.body.amenity,
-//         roommates: req.body.roommate,
-//         userId: res.locals.currentUser.id
-//       })
-//     })
 //   res.redirect('/apartment')
 // })
 
@@ -114,7 +104,23 @@ router.delete('/:id', (req, res) => {
   res.redirect('/apartment')
 })
 
-
+// SEARCH FOR AN APARTMENT USING LOCATION
+router.get('/search', (req, res) => {
+  console.log('result route')
+  //   let {term} = req.query
+  //Make lowerCase
+  //   term = term.toLowerCase()
+  console.log(req.query)
+  db.apartment.findAll({
+    where: { location: req.query.location }
+  }).then((apartments) => {
+    console.log('found one')
+    res.render('apartments/result', { apartments: apartments })
+  }).catch((error) => {
+    console.log(error)
+    res.send('RESULTS NOT RENDERING')
+  })
+})
 
 // GET AN APARTMENT USING ID - display a specific apartment and their tags
 router.get('/:id', (req, res) => {
@@ -129,23 +135,23 @@ router.get('/:id', (req, res) => {
   })
 })
 
-// SEARCH FOR AN APARTMENT USING LOCATION
-router.get('/search', (req, res) => {
-  console.log('result route')
-  //   let {term} = req.query
-  //Make lowerCase
-  //   term = term.toLowerCase()
-  console.log(req.query)
-  db.apartment.findAll({
-    where: { apartment: req.query.location }
-  }).then((apartment) => {
-    console.log('found one')
-    res.render('apartments/result', { apartment: apartment })
-  }).catch((error) => {
-    console.log(error)
-    res.send('RESULTS NOT RENDERING')
-  })
-})
+// UPDATE AN APARTMENT LISTING
+// router.put('/edit/:id', isLoggedIn, (req, res) => {
+//   db.apartment.findOne({
+//     where: { id: req.params.id },
+//   })
+//     .then((apartment) => {
+//       apartment.update({
+//         title: req.body.title,
+//         rent: req.body.rent,
+//         description: req.body.description,
+//         amenities: req.body.amenity,
+//         roommates: req.body.roommate,
+//         userId: res.locals.currentUser.id
+//       })
+//     })
+//   res.redirect('/apartment')
+// })
 
 // FAVORITE APARTMENTS
 // router.get('/:id', (req, res) => {
