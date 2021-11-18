@@ -9,7 +9,6 @@ const isLoggedIn = require('./middleware/isLoggedIn')
 let db = require('./models')
 let cloudinary = require('cloudinary')
 const axios = require('axios')
-const fs = require('fs')
 const methodOverride = require('method-override');
 
 // views (ejs and layouts) set up

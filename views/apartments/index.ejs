@@ -1,10 +1,12 @@
+<!-- ALL LISTINGS PAGE -->
 <h1>Apartments</h1>
 
 <% apartments.forEach(function(apartment) { %>
   <div class="well">
     <h2>
-      <a href="/apartments/<%= apartment.id %>">
+      <a href="/apartment/<%= apartment.id %>">
         <%= apartment.title %>
+        <%= apartment.rent %>
       </a>
     </h2>
   </div>

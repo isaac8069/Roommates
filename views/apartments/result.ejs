@@ -1,5 +1,6 @@
-<%if(apartment===undefined) {%>
-    <h3>No Favorites Found</h3>
+<!-- SEARCH RESULTS -->
+<%if(apartments===undefined) {%>
+    <h3>No Results Found</h3>
     <small>check your spelling and punctuation and try again</small>
     <%} else {%>
         <ul>
@@ -9,6 +10,7 @@
                         <%=apartment.title%>
                     </a>
                     <small>(<%=apartment.rent%>)</small>
+                    <small>(<%=apartment.location%>)</small>
                 </li>
                 <%})%>
         </ul>

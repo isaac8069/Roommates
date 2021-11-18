@@ -1,7 +1,18 @@
+<!-- SHOULD SHOW LISTING THAT IS CLICKED ON FROM ALL LISTINGS PAGE -->
 <h1>Apartment: <%= apartment.title %></h1>
 
+<div class="listings">
 <p><%= apartment.title %></p>
-<a href="/apartment/new" class="btn btn-primary">Create Listing</a>
+<p><%= apartment.rent %></p>
+<p><%= apartment.description %></p>
+<p><%= apartment.location %></p>
+<p><%= apartment.bedrooms %></p>
+<p><%= apartment.bathrooms %></p>
+<p><%= apartment.amenities %></p>
+<p><%= apartment.roommates %></p>
+</div>
+<!-- <a href="/apartment/new" class="btn btn-primary">Create Listing</a>
+
 
 <hr />
 
@@ -17,4 +28,4 @@
   <% }) %>
 <% } else { %>
   <h3>No listings yet!</h3>
-<% } %>
+<% } %> -->

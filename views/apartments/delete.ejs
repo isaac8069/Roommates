@@ -1,0 +1,11 @@
+<h1>Your Favorite Apartments</h1>
+<%apartments.forEach(apartment=> {%>
+    <h3>
+        <a href="/apartment/<%= apartment.id %>">
+            <%= apartment.title %>
+        </a>
+    </h3>
+    <form action="/faves/<%= apartment.id %>?_method=DELETE" method="post">
+        <button type="submit" class="btn btn-danger">Remove From Faves</button>
+    </form>
+    <%})%>

@@ -1,7 +1,8 @@
 <section id='add' class='container'>
     <div class='form-wrap'>
         <h1>Add An Apartment Listing</h1>
-        <form action="/apartment/new" method="POST">
+        <form action="/edit/<%= userId %>/?_method=PUT" method="POST"></form>
+        <!-- <form action="/apartment/new" method="POST"> -->
             <div class='form-group'>
                 <label for='title'>Title</label>
                 <input type='text' name='title' id='title' class='form-box' placeholder="eg. Bedroom available in an amazing 2bedroom apartment"

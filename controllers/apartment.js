@@ -1,6 +1,5 @@
 let express = require('express')
 const router = express.Router()
-const fs = require('fs')
 let db = require('../models')
 const axios = require('axios')
 const apartment = require('../models/apartment')
@@ -18,7 +17,7 @@ let cloudinary = require('cloudinary').v2
 
 
 
-// GET ALL APARTMENTS
+// GET ALL APARTMENTS - ALL LISTINGS
 router.get('/', (req, res) => {
   db.apartment.findAll()
     .then((apartments) => {
@@ -28,18 +27,28 @@ router.get('/', (req, res) => {
   // res.status(200).send('route successful')
 })
 
+// GET FORM to CREATE APARTMENT LISTING
+router.get('/new', (req, res) => {
+  db.apartment.findAll()
+    .then((apartment) => {
+      res.render('apartments/new', { apartment: apartment })
+    })
+    .catch((error) => {
+      res.status(200).send('new apartments')
+    })
+})
 
-//POST AN APARTMENT
+//POST AN APARTMENT TO ALL LISTINGS
 router.post('/new', (req, res) => {
   db.apartment.create({
     title: req.body.title,
     rent: req.body.rent,
     description: req.body.description,
     location: req.body.location,
-    bedrooms: req.body.bedroom,
-    bathrooms: req.body.bathroom,
-    amenities: req.body.amenity,
-    roommates: req.body.roommate,
+    bedrooms: req.body.bedrooms,
+    bathrooms: req.body.bathrooms,
+    amenities: req.body.amenites,
+    roommates: req.body.roommates,
     userId: req.body.userId
   })
     .then((apartment) => {
@@ -51,22 +60,22 @@ router.post('/new', (req, res) => {
 })
 
 // UPDATE AN APARTMENT LISTING
-router.put('/edit/:id', isLoggedIn, (req, res) => {
-  db.apartment.findOne({
-    where: { id: req.params.id },
-  })
-    .then((apartment) => {
-      apartment.update({
-        title: req.body.title,
-        rent: req.body.rent,
-        description: req.body.description,
-        amenities: req.body.amenity,
-        roommates: req.body.roommate,
-        userId: res.locals.currentUser.id
-      })
-    })
-  res.redirect('/apartment')
-})
+// router.put('/edit/:id', isLoggedIn, (req, res) => {
+//   db.apartment.findOne({
+//     where: { id: req.params.id },
+//   })
+//     .then((apartment) => {
+//       apartment.update({
+//         title: req.body.title,
+//         rent: req.body.rent,
+//         description: req.body.description,
+//         amenities: req.body.amenity,
+//         roommates: req.body.roommate,
+//         userId: res.locals.currentUser.id
+//       })
+//     })
+//   res.redirect('/apartment')
+// })
 
 // DELETE AN APARTMENT LISTING
 router.delete('/:id', (req, res) => {
@@ -86,39 +95,37 @@ router.delete('/:id', (req, res) => {
   res.redirect('/apartment')
 })
 
-// GET: /apartments/new - display form for creating a new apartment listing
-router.get('/new', (req, res) => {
-  db.apartment.findAll()
-    .then((apartment) => {
-      res.render('apartments/new', { apartment: apartment })
-    })
-    .catch((error) => {
-      res.status(200).send('new apartments')
-    })
-})
+
 
 // GET AN APARTMENT USING ID - display a specific apartment and their tags
-router.get('/:id', (req, res) => {
-  db.apartment.findOne({
-    include: [db.tag],
-    where: { id: req.params.id }
-  }).then((apartment) => {
-    res.render('apartments/show', { apartment: apartment })
-  }).catch((error) => {
-    console.log(error)
-    res.send('display apartments')
-  })
-})
+// router.get('/:id', (req, res) => {
+//   db.apartment.findOne({
+//     // include: [db.tag],
+//     where: { id: req.params.id }
+//   }).then((apartment) => {
+//     res.render('apartments/show', { apartment: apartment })
+//   }).catch((error) => {
+//     console.log(error)
+//     res.send('Apartment ID not found')
+//   })
+// })
 
 // SEARCH FOR AN APARTMENT USING LOCATION
 router.get('/search', (req, res) => {
+  console.log('result route')
   //   let {term} = req.query
   //Make lowerCase
   //   term = term.toLowerCase()
   console.log(req.query)
-  db.apartment.findAll({ where: { location: req.query.location } })
-    .then(apartment => res.render('apartments', { apartment }))
-    .catch(error => console.log(error))
+  db.apartment.findAll({
+    where: { apartment: req.query.location }
+  }).then((apartment) => {
+    console.log('found one')
+    res.render('apartments/result', { apartment: apartment })
+  }).catch((error) => {
+    console.log(error)
+    res.send('not working')
+  })
 })
 
 // FAVORITE APARTMENTS
