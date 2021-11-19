@@ -14,6 +14,9 @@
 
 <% if(apartment.image) {%>
 <img src="<%= apartment.image %>" alt="an image" height="200px">
+<form action="/apartment/<%= apartment.id %>?_method=DELETE" method="post">
+  <button type="submit" class="btn btn-danger">Remove From Faves</button>
+</form>
 <% } else { %>
   <% } %>
  
@@ -28,5 +31,6 @@
     </div>
   <% }) %>
 <% } else { %>
-  <h3>No listings yet!</h3>
+  <h3>TAGS!</h3>
 <% } %>
+

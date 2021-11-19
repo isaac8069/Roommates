@@ -4,7 +4,7 @@ The purpose of this app is to connect NYC roommate seekers and apartment seekers
 
 ## Tech Stack
 
-JS, EJS, CSS, RESTful API, npm install --save multer, npm install Cloudinary
+JS, EJS, CSS, RESTful API, npm install --save multer, npm install Cloudinary, npm i method override
 
 ## Wireframe
 
