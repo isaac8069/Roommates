@@ -34,6 +34,9 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+// methodOverride uses _method to override post or get from forms
+app.use(methodOverride('_method'))
+
 // flash middleware (must go AFTER session middleware)
 app.use(flash())
 
@@ -49,7 +52,7 @@ app.use((req, res, next) => {
 app.use('/auth', require('./controllers/auth'))
 app.use('/apartment', require('./controllers/apartment'))
 app.use('/tag', require('./controllers/tag'))
-app.use(methodOverride('_method'))
+
 
 // home route
 app.get('/', (req, res)=>{

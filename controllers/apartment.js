@@ -65,16 +65,42 @@ router.get('/image', (req, res) => {
     })
 })
 
-// PUT - CLOUDINARY  UPLOAD
+// POST - CLOUDINARY  UPLOAD
 router.post('/image', upload.single('myFile'), function(req, res) {
-  console.log(req.body)
   cloudinary.uploader.upload(req.file.path, function(result) {
-    console.log('image page works')
-    console.log(result)
-    console.log(result.url)
-    res.send(result);
+    // console.log('image page works')
+    // console.log(result)
+    // console.log('This should be the image', result.url)
+  })
+  .then(image => {
+    const apartment = req.body
+    // console.log('This should be the apartment body', apartment)
+    // console.log('This should be apartment and image', image)
+    res.render('apartments/update', {apartment: apartment, image: image.url})
   })
 })
+
+// PUT - CONFIRM FINAL IMAGE
+router.put('/:id/update', (req, res) => {
+  console.log('Should be whole apartment' ,req.body)
+    db.apartment.update({
+      title: req.body.title,
+      rent: req.body.rent,
+      description: req.body.description,
+      location: req.body.location,
+      bedrooms: req.body.bedrooms,
+      bathrooms: req.body.bathrooms,
+      amenities: req.body.amenities,
+      roommates: req.body.roommates,
+      image: req.body.image
+    }, { where: {id: req.params.id} })
+    .then(updatedApartment => {
+      console.log(`new apartment UPDATED: ${updatedApartment}`)
+        res.redirect(`/apartment/${req.params.id}`)
+    })
+    .catch(error => console.error)
+  })
+
 
 // DELETE AN APARTMENT LISTING
 router.delete('/:id', (req, res) => {
