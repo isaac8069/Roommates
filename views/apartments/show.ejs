@@ -1,36 +1,76 @@
 <!-- SHOULD SHOW LISTING THAT IS CLICKED ON FROM ALL LISTINGS PAGE -->
-<h1>Apartment: <%= apartment.title %></h1>
+<div class="container">
+  <h1>
+    <%= apartment.title %>
+  </h1>
+</div>
 
 <div class="listings">
-<p><%= apartment.title %></p>
-<p><%= apartment.rent %></p>
-<p><%= apartment.description %></p>
-<p><%= apartment.location %></p>
-<p><%= apartment.bedrooms %></p>
-<p><%= apartment.bathrooms %></p>
-<p><%= apartment.amenities %></p>
-<p><%= apartment.roommates %></p>
+
+  <div class="container">
+    <p><b>Rent</b> $<%= apartment.rent %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>About Listing</b>
+      <%= apartment.description %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Location</b>
+      <%= apartment.location %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Bedrooms</b>
+      <%= apartment.bedrooms %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Bathrooms</b>
+      <%= apartment.bathrooms %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Amenities</b>
+      <%= apartment.amenities %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Current Roommates</b>
+      <%= apartment.roommates %>
+    </p>
+  </div>
+
 </div>
 
 <% if(apartment.image) {%>
-<img src="<%= apartment.image %>" alt="an image" height="200px">
-<form action="/apartment/<%= apartment.id %>?_method=DELETE" method="post">
-  <button type="submit" class="btn btn-danger">Remove From Faves</button>
-</form>
-<% } else { %>
-  <% } %>
- 
+  <div class="container"><img src="<%= apartment.image %>" alt="an image" height="200px"></div>
+
+  <form action="/apartment/<%= apartment.id %>?_method=DELETE" method="post">
+    <div class="container"><button type="submit" class="btn btn-danger">Delete Listing</button></div>
+  </form>
+  <% } else { %>
+    <% } %>
+
 
 
 <% if(apartment && apartment.tags) { %>
   <% apartment.tags.forEach(function(a) { %>
     <div class="well">
       <h3>
-        <a href="/tag/<%= a.id %>"><%= a.title %></a>
+        <a href="/tag/<%= a.id %>">
+          <%= a.title %>
+        </a>
       </h3>
     </div>
-  <% }) %>
-<% } else { %>
-  <h3>TAGS!</h3>
-<% } %>
-
+    <% }) %>
+      <% } else { %>
+        <h3>TAGS!</h3>
+        <% } %>

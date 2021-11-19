@@ -6,15 +6,15 @@
     <h3>No Results Found</h3>
     <small>check your spelling and punctuation and try again</small>
     <%} else {%>
-        <ul>
-            <%apartments.forEach(function(apartment) {%>
-                <li>
+        <%apartments.forEach(function(apartment) {%>
+        <div>
+                <h3>
                     <a href="/apartment/<%=apartment.id%>">
                         <%=apartment.title%>
                     </a>
                     <small>$<%=apartment.rent%></small>
                     <small><%=apartment.location%></small>
-                </li>
+                </h3>
                 <%})%>
-        </ul>
+            </div>
         <%}%>

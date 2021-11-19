@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   apartment.init({
     title: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: DataTypes.TEXT,
     location: DataTypes.STRING,
     bedrooms: DataTypes.INTEGER,
     bathrooms: DataTypes.INTEGER,

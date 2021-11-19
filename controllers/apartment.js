@@ -4,7 +4,7 @@ let db = require('../models')
 const axios = require('axios')
 const apartment = require('../models/apartment')
 const sequelize = require('sequelize')
-const Op = sequelize.Op
+const {Op} = require('sequelize')
 const methodOverride = require('method-override');
 const cloudinary = require('cloudinary')
 const multer = require('multer')
@@ -128,7 +128,7 @@ router.get('/search', (req, res) => {
   //   term = term.toLowerCase()
   console.log(req.query)
   db.apartment.findAll({
-    where: { location: req.query.location }
+    where: {location: { [Op.like] : req.query.location } }
   }).then((apartments) => {
     console.log('found one')
     res.render('apartments/result', { apartments: apartments })
@@ -150,24 +150,6 @@ router.get('/:id', (req, res) => {
     res.send('APARTMENT ID NOT FOUND')
   })
 })
-
-// UPDATE AN APARTMENT LISTING
-// router.put('/edit/:id', isLoggedIn, (req, res) => {
-//   db.apartment.findOne({
-//     where: { id: req.params.id },
-//   })
-//     .then((apartment) => {
-//       apartment.update({
-//         title: req.body.title,
-//         rent: req.body.rent,
-//         description: req.body.description,
-//         amenities: req.body.amenity,
-//         roommates: req.body.roommate,
-//         userId: res.locals.currentUser.id
-//       })
-//     })
-//   res.redirect('/apartment')
-// })
 
 // FAVORITE APARTMENTS
 // router.get('/:id', (req, res) => {
