@@ -18,10 +18,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       bedrooms: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       bathrooms: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       amenities: {
         type: Sequelize.STRING
@@ -30,7 +30,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       roommates: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       userId: {
         type: Sequelize.INTEGER

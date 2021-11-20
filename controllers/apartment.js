@@ -151,17 +151,4 @@ router.get('/:id', (req, res) => {
   })
 })
 
-// FAVORITE APARTMENTS
-// router.get('/:id', (req, res) => {
-//   console.log('this is the fave id\n', req.params.id)
-//   db.apartment.findOne({
-//       where: { id: req.params.id }
-//   })
-//       .then(foundFave => {
-//           res.render('faveDetail', { title: foundFave.title, imdbId: foundFave.imdbId, date: foundFave.createdAt })
-//       })
-//       .catch(error => {
-//           console.error
-//       })
-// })
 module.exports = router

@@ -2,66 +2,84 @@ let express = require('express')
 let db = require('../models')
 let router = express.Router()
 const axios = require('axios')
+const tag = require('../models/tag')
 
 
-// GET /tags/new - display form for creating new tags
-router.get('/', (req, res) => {
-  db.tag.findAll()
-  .then((tags) => {
-    res.render('tags/index', { tags })
-  })
-  .catch((error) => {
-    res.status(200).send('new tags')
+// ADD A UNIGUE TAG TO AN APARTMENT
+// First, get a reference to a apartment.
+db.apartment.findOrCreate({
+  where: {
+    name: "Silly May",
+    userId: apartment.id
+  }
+}).then(([apartment, created]) => {
+  // Second, get a reference to a tag.
+  db.tag.findOrCreate({
+    where: {name: "stinky bear"}
+  }).then(([tag, created]) => {
+    // Finally, use the "addModel" method to attach one model to another model.
+    pet.addTag(tag).then(relationInfo => {
+      console.log(`${tag.name} added to ${apartment.name}.`)
+    })
   })
 })
 
-
-// POST /tags - create a new post
-router.post('/new', (req, res) => {
-  db.tag.create({
-    name: req.body.name,
-    tagId: req.body.tagId
-  })
-  .then((tag) => {
-    res.redirect('/tag')
-  })
-  .catch((error) => {
-    res.status(200).send('post tags')
+// ADD MORE TAGS AND MORE APARTMENTS
+app.post('/apartmentsTags', (req, res) => {
+  // First get a reference to the apartment
+  db.apartment.findByPk(req.body.apartmentId)
+  .then(apartment => {
+    db.tag.findByPk(req.body.apartmentId)
+    .then(tag => {
+      pet.addTag(tag);
+      res.redirect(`/apartments/${req.body.apartmentId}`)
+    })
   })
 })
 
-
-
-// GET /tags/:id - display a specific post and its tag
-router.get('/:id', (req, res) => {
-  db.tag.findOne({
-    where: { id: req.params.id },
-  })
-  .then((tag) => {
-    // if (!tag) throw Error()
-    console.log('these are the tags', tag)
-    res.render('tags/show', { tag: tag })
-  })
-  .catch((error) => {
-    console.log(error)
-    res.status(200).send('find tag')
+// Get ALL APARTMENTS THAT USE A TAG
+db.tag.findOne({
+  where: {name: "stinky bear"}
+}).then(tag => {
+  toy.getApartments().then(apartments => {
+    console.log(`${apartments.length} apartment(s) loves the ${tag.name}.`)
   })
 })
 
-//POST ==> /tags/:id:comments --> this willl add a new comment
-// req.body is coming from the form in show.ejs
-// req.params is referring the url
-router.post('/:id/comments', (req,res) => {
-  db.comment.create({
-    name: req.body.name,
-    tagId: req.params.id
+//  ADD AN APARTMENT ASSOCIATION ON A TAG IF THERE ARE NO APARTMENT ASSOCIATIONS YET
+db.tag.findOrCreate({
+  where: {name: "ball"}
+}).then(([tag, created]) => {
+  tag.getApartments().then(apartments => {
+    // Check if their are any apartments associated with this tag
+    if (apartments.length > 0) {
+      apartments.forEach(apartment => {
+        console.log(`${apartment.name} loves their ${tag.name}.`)
+      });
+    } else {
+      // findOrCreate a Apartment and add it to the tag
+      db.apartment.findOrCreate({
+        where: {
+          name: "Ruby Tuesday",
+        }
+      }).then(([apartment, created]) => {
+        toy.addApartment(apartment).then(relationInfo => {
+          console.log(`${apartment.name} has faved the ${tag.name}tag.`);
+        })
+      })
+    } // end of if statement
   })
-  .then(resPost => {
-    console.log('created tag', resPost)
-    res.redirect(`/tags/${req.params.id}`)
-  })
-  .catch(err => {
-    res.status(200).render
+})
+
+// FIND ALL DATA
+db.apartment.findOne({
+  where: {
+    userId: "Silly May"
+  },
+  include: [db.user, db.tag]
+}).then(apartment => {
+  aprtment.tags.forEach(tag => {
+    console.log(`${apartment.user.firstName}'s apartment ${apartment.name} loves their ${tag.name}.`)
   })
 })
 

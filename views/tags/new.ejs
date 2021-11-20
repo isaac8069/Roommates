@@ -1,16 +1,17 @@
+<!-- CREATE TAGS -->
 <h1>Create Tags</h1>
 
-<form action="/tags" method="POST">
+<form action="/tags/new" method="POST">
   <div class="form-group">
     <label for="name">Tags</label>
     <textarea type="text" class="form-control" id="tag" name="tag" placeholder="eg. pet friendly, no smoking, 420 friendly, artist, homebody, no pets, quiet, never home" required></textarea>
   </div>
 
   <div class="form-group">
-    <label for="apartment">Apartment</label>
-    <select name="apartmentId" id="apartment" class="form-control" required>
-      <% apartments.forEach(function(apartment) { %>
-        <option value="<%= apartment.id %>"><%= apartment.title() %></option>
+    <label for="tag">Tag</label>
+    <select name="tagId" id="tag" class="form-control" required>
+      <% tags.forEach(function(tag) { %>
+        <option value="<%= tag.id %>"><%= tag.title() %></option>
       <% }) %>
     </select>
     <p>If your listing doesn't show up please sign in.<a href="/auth/signup">Sign up to list an apartment.</a></p>
