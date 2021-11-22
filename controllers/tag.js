@@ -1,86 +1,83 @@
 let express = require('express')
 let db = require('../models')
-let router = express.Router()
-const axios = require('axios')
+const router = express.Router()
+const sequelize = require('sequelize')
 const tag = require('../models/tag')
+const apartment = require('../models/apartment')
 
+// GET ALL APARTMENTS BY userId
+router.get('/new', (req, res) => {
+  console.log('GET ALL USER APARTMENTS')
+  const userId = req.user.dataValues.id
+  console.log('CHECK FOR USER', userId)
+  db.apartment.findAll({
+    where: { userId: userId },
+    include: [db.user]
+  })
+    .then((apartments) => {
+      console.log('IS THIS WORKING', apartments)
+      res.render('tags/new', { apartments })
+    })
+    .catch((error) => {
+      res.status(200).send('Not Working')
+    })
+})
 
-// ADD A UNIGUE TAG TO AN APARTMENT
+// POST ADD TAG
+router.post('/new', (req, res) => {
+  db.tag.create({
+    name: req.body.name
+  })
+    .then((apartment) => {
+      res.redirect('/tags/show')
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+})
+
+// GET - VIEW ALL TAGS
+router.get('/', (req, res) => {
+  db.tag.findAll()
+    .then((tags) => {
+      res.render('tags/index', { tags })
+    })
+    .catch(err => console.log(err))
+  res.status(200).send('Route successful. This is where all tags will go')
+})
+
 // First, get a reference to a apartment.
-db.apartment.findOrCreate({
-  where: {
-    name: "Silly May",
-    userId: apartment.id
-  }
-}).then(([apartment, created]) => {
-  // Second, get a reference to a tag.
-  db.tag.findOrCreate({
-    where: {name: "stinky bear"}
-  }).then(([tag, created]) => {
-    // Finally, use the "addModel" method to attach one model to another model.
-    pet.addTag(tag).then(relationInfo => {
-      console.log(`${tag.name} added to ${apartment.name}.`)
-    })
-  })
-})
+// router.post('apartments/tags', (req, res) => {
+//   db.apartment.findByPk(req.body.apartmentId)
+//   .then(apartment => {
+//     db.tag.findByPk(req.body.apartmentId)
+//     .then(tag => {
+//       apartment.addTag(tag)
+//       res.redirect(/tags/show)
+//     })
+//   })
+// })
 
-// ADD MORE TAGS AND MORE APARTMENTS
-app.post('/apartmentsTags', (req, res) => {
-  // First get a reference to the apartment
-  db.apartment.findByPk(req.body.apartmentId)
-  .then(apartment => {
-    db.tag.findByPk(req.body.apartmentId)
-    .then(tag => {
-      pet.addTag(tag);
-      res.redirect(`/apartments/${req.body.apartmentId}`)
-    })
-  })
-})
 
-// Get ALL APARTMENTS THAT USE A TAG
-db.tag.findOne({
-  where: {name: "stinky bear"}
-}).then(tag => {
-  toy.getApartments().then(apartments => {
-    console.log(`${apartments.length} apartment(s) loves the ${tag.name}.`)
-  })
-})
+// // Get ALL APARTMENTS THAT USE A TAG
+// db.tag.findAll({
+//   where: {name: "stinky bear"}
+// }).then(tag => {
+//   toy.getApartments().then(apartments => {
+//     console.log(`${apartments.length} apartment(s) loves the ${tag.name}.`)
+//   })
+// })
 
-//  ADD AN APARTMENT ASSOCIATION ON A TAG IF THERE ARE NO APARTMENT ASSOCIATIONS YET
-db.tag.findOrCreate({
-  where: {name: "ball"}
-}).then(([tag, created]) => {
-  tag.getApartments().then(apartments => {
-    // Check if their are any apartments associated with this tag
-    if (apartments.length > 0) {
-      apartments.forEach(apartment => {
-        console.log(`${apartment.name} loves their ${tag.name}.`)
-      });
-    } else {
-      // findOrCreate a Apartment and add it to the tag
-      db.apartment.findOrCreate({
-        where: {
-          name: "Ruby Tuesday",
-        }
-      }).then(([apartment, created]) => {
-        toy.addApartment(apartment).then(relationInfo => {
-          console.log(`${apartment.name} has faved the ${tag.name}tag.`);
-        })
-      })
-    } // end of if statement
-  })
-})
-
-// FIND ALL DATA
-db.apartment.findOne({
-  where: {
-    userId: "Silly May"
-  },
-  include: [db.user, db.tag]
-}).then(apartment => {
-  aprtment.tags.forEach(tag => {
-    console.log(`${apartment.user.firstName}'s apartment ${apartment.name} loves their ${tag.name}.`)
-  })
-})
+// // FIND ALL DATA
+// db.apartment.findAll({
+//   where: {
+//     userId: currentUser.id
+//   },
+//   include: [db.user, db.tag]
+// }).then(apartment => {
+//   aprtment.tags.forEach(tag => {
+//     console.log(`${apartment.user.firstName}'s apartment ${apartment.name} loves their ${tag.name}.`)
+//   })
+// })
 
 module.exports = router

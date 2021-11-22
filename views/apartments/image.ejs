@@ -1,15 +1,30 @@
-<h1>Add Image</h1>
-<p><b>Must add an image to submit!</b></p>
-<form enctype="multipart/form-data" action="/apartment/image" method="post">
-    <input type="file" name="myFile">
-    <input hidden type="text" name="title" value='<%= apartment.title %>'>
-    <input hidden type="text" name="rent" value='<%= apartment.rent %>'>
-    <input hidden type="text" name="description" value='<%= apartment.description %>'>
-    <input hidden type="text" name="location" value='<%= apartment.location %>'>
-    <input hidden type="text" name="bedrooms" value='<%= apartment.bedrooms %>'>
-    <input hidden type="text" name="bathrooms" value='<%= apartment.bathrooms %>'>
-    <input hidden type="text" name="amenities" value='<%= apartment.amenities %>'>
-    <input hidden type="text" name="roommates" value='<%= apartment.roommates %>'>
-    <input hidden type="text" name="id" value='<%= apartment.id %>'>
-    <input type="submit" class="btn btn-primary">
-</form>
+<div class="container">
+    <div class="container">
+        <h1>Add Image</h1>
+    </div>
+    <div class="container">
+        <p><b>Must add an image to submit!</b></p>
+    </div>
+    <form enctype="multipart/form-data" action="/apartment/image" method="post">
+        <div class='form-wrap'>
+            <div class="container">
+                <input type="file" name="myFile">
+            </div>
+
+            <input hidden type="text" name="title" value='<%= apartment.title %>'>
+            <input hidden type="text" name="rent" value='<%= apartment.rent %>'>
+            <input hidden type="text" name="description" value='<%= apartment.description %>'>
+            <input hidden type="text" name="location" value='<%= apartment.location %>'>
+            <input hidden type="text" name="bedrooms" value='<%= apartment.bedrooms %>'>
+            <input hidden type="text" name="bathrooms" value='<%= apartment.bathrooms %>'>
+            <input hidden type="text" name="amenities" value='<%= apartment.amenities %>'>
+            <input hidden type="text" name="roommates" value='<%= apartment.roommates %>'>
+            <input hidden type="text" name="id" value='<%= apartment.id %>'>
+            <div class='form-wrap'>
+                <div class="container">
+                    <input type="submit" class="btn btn-primary">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

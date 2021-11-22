@@ -1,12 +1,66 @@
-<h1><%= tag.name %> <small>by <%= tag.name %></small></h1>
-
-<p><%= tag.name %></p>
+<!-- Show ALL USERS LISTINGS WITH ADDED TAGS -->
+<div class="container">
+  <h1>
+    <%= apartment.title %>
+  </h1>
+</div>
 
 <div class="listings">
 
-    <div class="container">
-      <p><b>Tags</b> $<%= tag.name %>
-      </p>
-    </div>
-<!-- I want all apartments to appear with the associated tag(s) (keyword search). For example if I click on a tag, I want any listing linked to that tag to appear -->
+  <div class="container">
+    <p><b>Rent</b> $<%= apartment.rent %>
+    </p>
+  </div>
 
+  <div class="container">
+    <p><b>About Listing</b>
+      <%= apartment.description %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Location</b>
+      <%= apartment.location %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Bedrooms</b>
+      <%= apartment.bedrooms %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Bathrooms</b>
+      <%= apartment.bathrooms %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Amenities</b>
+      <%= apartment.amenities %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Current Roommates</b>
+      <%= apartment.roommates %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Tags</b>
+      <%= tag.name %>
+    </p>
+  </div>
+
+</div>
+
+<% if(apartment.image) {%>
+  <div class="container"><img src="<%= apartment.image %>" alt="an image" height="200px"></div>
+
+  <form action="/apartment/<%= apartment.id %>?_method=DELETE" method="post">
+    <div class="container"><button type="submit" class="btn btn-danger">Delete Listing</button></div>
+  </form>
+  <% } else { %>
+    <% } %>

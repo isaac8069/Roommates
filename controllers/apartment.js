@@ -1,11 +1,10 @@
 let express = require('express')
-const router = express.Router()
 let db = require('../models')
-const axios = require('axios')
+const router = express.Router()
 const apartment = require('../models/apartment')
 const sequelize = require('sequelize')
 const {Op} = require('sequelize')
-const methodOverride = require('method-override');
+const methodOverride = require('method-override')
 const cloudinary = require('cloudinary')
 const multer = require('multer')
 const upload = multer({ dest: './uploads/' })
@@ -43,7 +42,7 @@ router.post('/new', (req, res) => {
     bathrooms: req.body.bathrooms,
     amenities: req.body.amenities,
     roommates: req.body.roommates,
-    userId: req.body.userId
+    userId: res.locals.currentUser.id
   })
     .then((apartment) => {
       res.render('apartments/image', { apartment: apartment})
@@ -145,6 +144,7 @@ router.get('/:id', (req, res) => {
     where: { id: req.params.id }
   }).then((apartment) => {
     res.render('apartments/show', { apartment: apartment })
+    console.log('apartment', apartment)
   }).catch((error) => {
     console.log(error)
     res.send('APARTMENT ID NOT FOUND')

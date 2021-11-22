@@ -1,21 +1,77 @@
 <!-- CREATE TAGS -->
-<h1>Create Tags</h1>
+<div class="container">
+  <h1>
+    <%= currentUser.firstName %>'s Listings
+  </h1>
+</div>
 
-<form action="/tags/new" method="POST">
-  <div class="form-group">
-    <label for="name">Tags</label>
-    <textarea type="text" class="form-control" id="tag" name="tag" placeholder="eg. pet friendly, no smoking, 420 friendly, artist, homebody, no pets, quiet, never home" required></textarea>
-  </div>
+<div class="container">
+  <% apartments.forEach(apartment => { %>
+    <div class="well">
 
-  <div class="form-group">
-    <label for="tag">Tag</label>
-    <select name="tagId" id="tag" class="form-control" required>
-      <% tags.forEach(function(tag) { %>
-        <option value="<%= tag.id %>"><%= tag.title() %></option>
-      <% }) %>
-    </select>
-    <p>If your listing doesn't show up please sign in.<a href="/auth/signup">Sign up to list an apartment.</a></p>
-  </div>
+      <div class="container">
+        <h1>
+          <%= apartment.title %>
+        </h1>
+      </div>
 
-  <input type="submit" class="btn btn-primary">
-</form>
+      <div class="container">
+        <h1>
+          $<%= apartment.rent %>/month
+      </div>
+
+      <div class="container">
+        <p><b>About Listing</b>
+          <%= apartment.description %>
+        </p>
+      </div>
+
+      <div class="container">
+        <p><b>Location</b>
+          <%= apartment.location %>
+        </p>
+      </div>
+      <div class="container">
+        <p><b>Number of Bedrooms</b>
+          <%= apartment.bedrooms %>
+        </p>
+      </div>
+
+      <div class="container">
+        <p><b>Number of Bathrooms</b>
+          <%= apartment.bathrooms %>
+        </p>
+      </div>
+
+      <div class="container">
+        <p><b>Amenities</b>
+          <%= apartment.amenities %>
+        </p>
+      </div>
+
+      <div class="container">
+        <p><b>Number of Current Roommates</b>
+          <%= apartment.roommates %>
+        </p>
+      </div>
+
+      <section id='add' class='container'>
+        <div class='form-wrap'>
+          <form action="/tags/show" method="POST">
+            <div class="form-group">
+              <label for="tag">Tags</label>
+              <input type="text" name="tag" id="tag" class="form-box"
+                placeholder="eg. pet friendly, no smoking, 420 friendly, artist, homebody, no pets, quiet, never home"
+                values={{tags}}>
+            </div>
+
+
+        </div>
+      </section>
+
+    </div>
+    <% }) %>
+    <input type="submit" class="btn btn-primary">
+  </form>
+</div>
+

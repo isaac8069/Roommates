@@ -1,4 +1,4 @@
-<!-- SHOULD SHOW LISTING THAT IS CLICKED ON FROM ALL LISTINGS PAGE -->
+<!-- SHOW LISTING THAT IS CLICKED ON FROM ALL LISTINGS PAGE -->
 <div class="container">
   <h1>
     <%= apartment.title %>
@@ -48,6 +48,11 @@
     </p>
   </div>
 
+  <div class="container">
+    <p><b>Tags</b>
+    </p>
+  </div>
+  
 </div>
 
 <% if(apartment.image) {%>
@@ -58,19 +63,3 @@
   </form>
   <% } else { %>
     <% } %>
-
-
-
-<% if(apartment && apartment.tags) { %>
-  <% apartment.tags.forEach(function(a) { %>
-    <div class="well">
-      <h3>
-        <a href="/tag/<%= a.id %>">
-          <%= a.title %>
-        </a>
-      </h3>
-    </div>
-    <% }) %>
-      <% } else { %>
-        <h3>TAGS!</h3>
-        <% } %>
