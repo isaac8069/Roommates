@@ -3,7 +3,7 @@ let db = require('../models')
 const router = express.Router()
 const apartment = require('../models/apartment')
 const sequelize = require('sequelize')
-const {Op} = require('sequelize')
+const { Op } = require('sequelize')
 const methodOverride = require('method-override')
 const cloudinary = require('cloudinary')
 const multer = require('multer')
@@ -45,7 +45,7 @@ router.post('/new', (req, res) => {
     userId: res.locals.currentUser.id
   })
     .then((apartment) => {
-      res.render('apartments/image', { apartment: apartment})
+      res.render('apartments/image', { apartment: apartment })
     })
     .catch((error) => {
       console.log(error)
@@ -65,40 +65,40 @@ router.get('/image', (req, res) => {
 })
 
 // POST - CLOUDINARY  UPLOAD
-router.post('/image', upload.single('myFile'), function(req, res) {
-  cloudinary.uploader.upload(req.file.path, function(result) {
+router.post('/image', upload.single('myFile'), function (req, res) {
+  cloudinary.uploader.upload(req.file.path, function (result) {
     // console.log('image page works')
     // console.log(result)
     // console.log('This should be the image', result.url)
   })
-  .then(image => {
-    const apartment = req.body
-    // console.log('This should be the apartment body', apartment)
-    // console.log('This should be apartment and image', image)
-    res.render('apartments/update', {apartment: apartment, image: image.url})
-  })
+    .then(image => {
+      const apartment = req.body
+      // console.log('This should be the apartment body', apartment)
+      // console.log('This should be apartment and image', image)
+      res.render('apartments/update', { apartment: apartment, image: image.url })
+    })
 })
 
 // PUT - CONFIRM FINAL IMAGE
 router.put('/:id/update', (req, res) => {
-  console.log('Should be whole apartment' ,req.body)
-    db.apartment.update({
-      title: req.body.title,
-      rent: req.body.rent,
-      description: req.body.description,
-      location: req.body.location,
-      bedrooms: req.body.bedrooms,
-      bathrooms: req.body.bathrooms,
-      amenities: req.body.amenities,
-      roommates: req.body.roommates,
-      image: req.body.image
-    }, { where: {id: req.params.id} })
+  console.log('Should be whole apartment', req.body)
+  db.apartment.update({
+    title: req.body.title,
+    rent: req.body.rent,
+    description: req.body.description,
+    location: req.body.location,
+    bedrooms: req.body.bedrooms,
+    bathrooms: req.body.bathrooms,
+    amenities: req.body.amenities,
+    roommates: req.body.roommates,
+    image: req.body.image
+  }, { where: { id: req.params.id } })
     .then(updatedApartment => {
       console.log(`new apartment UPDATED: ${updatedApartment}`)
-        res.redirect(`/apartment/${req.params.id}`)
+      res.redirect(`/apartment/${req.params.id}`)
     })
     .catch(error => console.error)
-  })
+})
 
 
 // DELETE AN APARTMENT LISTING
@@ -127,7 +127,7 @@ router.get('/search', (req, res) => {
   //   term = term.toLowerCase()
   console.log(req.query)
   db.apartment.findAll({
-    where: {location: { [Op.like] : req.query.location } }
+    where: { location: { [Op.like]: req.query.location } }
   }).then((apartments) => {
     console.log('found one')
     res.render('apartments/result', { apartments: apartments })

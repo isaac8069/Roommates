@@ -12,7 +12,7 @@ const multer = require('multer')
 const upload = multer({ dest: './uploads/' })
 const axios = require('axios')
 const methodOverride = require('method-override')
-const {Op} = require('sequelize')
+const { Op } = require('sequelize')
 
 // views (ejs and layouts) set up
 app.set('view engine', 'ejs')
@@ -22,7 +22,7 @@ app.use(ejsLayouts)
 app.use(express.static(__dirname + '/public/'))
 
 // body parser middelware
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: false }))
 
 // session middleware
 app.use(session({
@@ -56,17 +56,17 @@ app.use('/tag', require('./controllers/tag'))
 
 
 // home route
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
     res.render('home')
 })
 
 // profile route
-app.get('/profile', isLoggedIn, (req, res)=>{
+app.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile')
 })
 
 
-app.listen(3000, ()=>{
+app.listen(3000, () => {
     console.log(`process.env.SUPER_SECRET_SECRET ${process.env.SUPER_SECRET_SECRET}`)
     console.log("auth_practice running on port 3000")
 })

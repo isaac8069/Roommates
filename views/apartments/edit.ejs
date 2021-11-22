@@ -3,35 +3,38 @@
         <h1>Add An Apartment Listing</h1>
         <form action="/edit/<%= userId %>/?_method=PUT" method="POST"></form>
         <!-- <form action="/apartment/new" method="POST"> -->
-            <div class='form-group'>
-                <label for='title'>Title</label>
-                <input type='text' name='title' id='title' class='form-box' placeholder="eg. Bedroom available in an amazing 2bedroom apartment"
-                maxlength="300" values={{title}} required>
-            </div>
+        <div class='form-group'>
+            <label for='title'>Title</label>
+            <input type='text' name='title' id='title' class='form-box'
+                placeholder="eg. Bedroom available in an amazing 2bedroom apartment" maxlength="300" values={{title}}
+                required>
+        </div>
 
-            <div>
-                <div class='form-group'>
+        <div>
+            <div class='form-group'>
                 <label for='rent'>Rent</label>
-                <input type="number" name="rent" id="rent" class="form-box" placeholder="eg. 1500" values={{rent}} required>
+                <input type="number" name="rent" id="rent" class="form-box" placeholder="eg. 1500" values={{rent}}
+                    required>
             </div>
             <div>
                 <label for='description'>About Listing</label>
-                <textarea type="text" name='description' id='description' class='form-box' placeholder="eg. Modern architecture that emphasizes space, light exposure, and luxury interiors. Includes a 24-hour gym, laundry, great rooftop, elevator, floor to ceiling windows, and balcony in unit! The bedroom available in this apartment"
-                rows="10" values={{description}} required></textarea>
+                <textarea type="text" name='description' id='description' class='form-box'
+                    placeholder="eg. Modern architecture that emphasizes space, light exposure, and luxury interiors. Includes a 24-hour gym, laundry, great rooftop, elevator, floor to ceiling windows, and balcony in unit! The bedroom available in this apartment"
+                    rows="10" values={{description}} required></textarea>
             </div>
             <div>
                 <label for='amenities'>Amenities</label>
-                <input type='text' name='amenities' id='amenities' class='form-box' placeholder="eg. washer and dryer in unit, 24-hour gym, doorman, pool"
-                value={{amenity}}>
+                <input type='text' name='amenities' id='amenities' class='form-box'
+                    placeholder="eg. washer and dryer in unit, 24-hour gym, doorman, pool" value={{amenity}}>
             </div>
             <div>
                 <label for='roommates'>Number of Current Roommates</label>
                 <input type='text' name='roommates' id='roommates' class='form-box' placeholder="eg. 2"
-                value={{roommates}} required>
+                    value={{roommates}} required>
             </div>
 
             <input type="submit" value="Update" class="btn btn-primary">
-        </form>
+            </form>
 
-    </div>
+        </div>
 </section>

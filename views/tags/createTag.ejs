@@ -1,66 +1,66 @@
 <div class="container">
-    <h1>
-      <%= apartment.title %>
-    </h1>
+  <h1>
+    <%= apartment.title %>
+  </h1>
+</div>
+
+<div class="listings">
+
+  <div class="container">
+    <p><b>Rent</b> $<%= apartment.rent %>
+    </p>
   </div>
-  
-  <div class="listings">
-  
-    <div class="container">
-      <p><b>Rent</b> $<%= apartment.rent %>
-      </p>
-    </div>
-  
-    <div class="container">
-      <p><b>About Listing</b>
-        <%= apartment.description %>
-      </p>
-    </div>
-  
-    <div class="container">
-      <p><b>Location</b>
-        <%= apartment.location %>
-      </p>
-    </div>
-  
-    <div class="container">
-      <p><b>Number of Bedrooms</b>
-        <%= apartment.bedrooms %>
-      </p>
-    </div>
-  
-    <div class="container">
-      <p><b>Number of Bathrooms</b>
-        <%= apartment.bathrooms %>
-      </p>
-    </div>
-  
-    <div class="container">
-      <p><b>Amenities</b>
-        <%= apartment.amenities %>
-      </p>
-    </div>
-  
-    <div class="container">
-      <p><b>Number of Current Roommates</b>
-        <%= apartment.roommates %>
-      </p>
-    </div>
-  
+
+  <div class="container">
+    <p><b>About Listing</b>
+      <%= apartment.description %>
+    </p>
   </div>
-  
-  <section id='add' class='container'>
-    <div class='form-wrap'>
-      <form action="/tags/new" method="POST">
-        <div class="form-group">
-          <label for="tag">Tags</label>
-          <input type="text" name="tag" id="tag" class="form-box"
-            placeholder="eg. pet friendly, no smoking, 420 friendly, artist, homebody, no pets, quiet, never home"
-            values={{tags}} required>
-        </div>
-  
-        <input type="submit" class="btn btn-primary">
-      </form>
-  
-    </div>
-  </section>
+
+  <div class="container">
+    <p><b>Location</b>
+      <%= apartment.location %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Bedrooms</b>
+      <%= apartment.bedrooms %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Bathrooms</b>
+      <%= apartment.bathrooms %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Amenities</b>
+      <%= apartment.amenities %>
+    </p>
+  </div>
+
+  <div class="container">
+    <p><b>Number of Current Roommates</b>
+      <%= apartment.roommates %>
+    </p>
+  </div>
+
+</div>
+
+<section id='add' class='container'>
+  <div class='form-wrap'>
+    <form action="/tags/new" method="POST">
+      <div class="form-group">
+        <label for="tag">Tags</label>
+        <input type="text" name="tag" id="tag" class="form-box"
+          placeholder="eg. pet friendly, no smoking, 420 friendly, artist, homebody, no pets, quiet, never home"
+          values={{tags}} required>
+      </div>
+
+      <input type="submit" class="btn btn-primary">
+    </form>
+
+  </div>
+</section>

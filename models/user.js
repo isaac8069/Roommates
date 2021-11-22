@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      models.user.belongsToMany(models.apartment, {through: "userApartment"})
+      models.user.belongsToMany(models.apartment, { through: "userApartment" })
     }
   };
   user.init({
@@ -72,7 +72,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args:[8,99],
+          args: [8, 99],
           msg: 'Password must be between 8 and 99 characters.'
         }
       }
@@ -82,12 +82,12 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'user',
   });
 
-  user.addHook('beforeCreate', async (pendingUser, options)=>{
+  user.addHook('beforeCreate', async (pendingUser, options) => {
     await bcrypt.hash(pendingUser.password, 10)
-    .then(hashedPassword=>{
-      console.log(`${pendingUser.password} became ---> ${hashedPassword}`)
-      pendingUser.password = hashedPassword
-    })
+      .then(hashedPassword => {
+        console.log(`${pendingUser.password} became ---> ${hashedPassword}`)
+        pendingUser.password = hashedPassword
+      })
   })
 
   return user;
