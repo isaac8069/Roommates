@@ -2,7 +2,23 @@
 
 ## About 
 
-This is a NYC based apartment and roommate seeking app. The purpose of this app is to connect renters and rentees. This app will allow people to post their apartments online with hopes of finding a roommate or someone to take over there apartment via rent or sublease. Apartment seekers will be able to view all apartment listings, search for apartments by location, and use tags (keywords) to find apartment listings
+This is a NYC based apartment and roommate seeking app. The purpose of this app is to connect renters and rentees. This app will allow people to post their apartments online with the hopes of finding a roommate or someone to take over their apartment via rent or sublease. It will also allow apartment seekers to find listings and inquire about them via email.
+
+Apartment Renters will be able to create an apartment listing, add an image to the apartment, and add tags to the apartment listing. Apartment seekers will be able to view all apartment listings, search for apartments by location, and use tags (keywords) to find any apartment listing with the associated tag. **Both apartment renter and seeker will need to create an account to access the full app.**
+
+## Tech Stack
+
+Postgres SQL, Node.JS, npm express, JS, EJS, Bootstrap, CSS, RESTful, npm install --save multer, Cloudinary API to upload images to apartment listings, passport, passport-local, method-override, nodemon, sequalize, sequalize-cli, dotenv, bcrypt, connect-flash, pg, express-ejs-layouts, express-session
+
+## Wireframe
+
+Please reference Mind Map-Roommate pdf
+
+## ERD Model
+
+Please reference NYC ERD Roommates pdf
+
+## Live Link
 
 ## How To Use The App
 **Sign Up**
@@ -21,8 +37,10 @@ This is a NYC based apartment and roommate seeking app. The purpose of this app 
 
 **All Listings Page**
 * The All Listings page renders all active listings by all users.
+    * The layout of the listings is title and rent only
+        * *Example: 3 Bedroom with beautiful view of the city $3800/month*
     * Click any listing to view all the details related to that particular listing
-        * *Note: you will be take to the view page for that listing. The creator of this listing will be able to delete from this view*
+        * *Note: you will be taken to the view page for that listing. The creator of this listing will be able to delete the listing from this view*
 
 **Create Listing Page**
 * The Create Listing page will allow you to create an apartment listing using the specified fields below
@@ -32,7 +50,7 @@ This is a NYC based apartment and roommate seeking app. The purpose of this app 
     * **Rent**
         * Add numeric value only. Please do not add a currency sign
             * *Example: add only 5500. Do not use $.*
-            * Rent will be post in USD
+            * Rent will be posted in USD
     * **About Listing**
         * Add a brief description describing the best qualities about the listing and any other detail you feel is necessary
     * **Location**
@@ -40,38 +58,73 @@ This is a NYC based apartment and roommate seeking app. The purpose of this app 
             * Please use the format of neighborhood, borough
             * *Example: Williamsburg, Brooklyn or Chelsea, Manhattan*
     * **Bedrooms**
-        *
-    
-        
-    
-## Tech Stack
+        * Add number of bedrooms
+            * *Example: 1 = 1 bedroom, 3 = 3 bedrooms, studio*
+                * **Please only add number or studio in this field**
+    * **Bathrooms**
+        * Add number of bathrooms
+            * *Example: 1 = 1 bathroom, 1.5 = 1.5 bathrooms, 2 = 2 bathrooms*
+                * **Please only add number in this field**
+    * **Amenities**
+        * Add all amenities that you feel are necessary
+            * *Example: washer-dryer in unit, doorman, roof deck, private backyard, pool, patio off bedroom*
+            * **Please seperate amenities with a comma and space as seen above in the example**
+    * **Number of Current Roommates**
+        * Add number of roommates that currently live their
+            * *Example: 0 = no roommtes, 1 = 1 roommate, 2 = 2 roommates, 3 = 3 roommates*
+            * **Please only add a number to this field. Add 0 if renting/subleasing the entire apartment**
 
-Postgres, JS, EJS, CSS, RESTful, npm install --save multer, Cloudinary API to upload images to apartment listings, npm i method override
+* Hit submit after all information is added. **Please note that all fields are required except for amenities**
 
-## Wireframe
+* You will then be redirected to a page to add an image. 
+    * Click choose file
+        * Add the image you wish to associate with your apartment listing
+    * Then hit submit
+    **Please note: You must add an image to create listing**
 
-Please reference Mind Map-Roommate pdf
+* After image is added you will have one more opportunity to update any information from the create a listing page. **Please do not edit the image field**
 
-## ERD Model
+* After reviewing your listing hit submit. This will take you directely to a page to view the listing you just created with all the information and image rendered.
 
-Please reference NYC ERD Roommates pdf
+**View All Tags Page**
+* This page will show every tag created by all users
+    * You will be able to click on a tag and be taken to a page that has every listing associated to that tag
+        * From that page you can click any listing and be taken to another page to view all details
 
-## Live Link
+**Add Tag Page**
+* This page will render every listing created by the logged in user. Here you will be able to add a tag to any of the listings that you have created. To complete the tag creation hit the submit button.
+    **Please note: tags should be one to three words only**
+    * *Example: pet friendly or great for plants or spacious
+* You will then be taken to a page to see all your apartments created with the newly added tag.
+        * *Note: you will not be able to see the image on this page*
 
+**Logout**
+* If you are done using the app click logout
+                   
 ## MVP Goals
 
-* Goal 1
-* Goal 2
-* Goal 3
-* Goal 4
+* RESTful code
+* Used a 3rd party API called Cloudinary
+* Made the appropiate assoctations between tables in my database
+* Able to create user
+* Able to create listing
+* Able to create tag
+* Has CRUD within the app
+    * CREATE an apartment listing
+    * POST apartment to be viewed
+    * UPDATE apartment with image
+    * UPDATE apartment creation fields
+    * DELETE an apartment
+    * UPDATE apartment with CREATED tag
 
 ## Stretch Goals
 
-* Stretch Goal 1
-* Stretch Goal 2
+* Style with Bootstrap and CSS
+* Create a profile view
+    * The ability to update profile information
+    * The ability to delete profile
 * Stretch Goal 3
 
 ## Any Potential Roadblocks
-* Potential Roadblock 1
-* Potential Roadblock 2
-* Potential Roadblock 3
+* Creating a tag by finding an apartment via the association models
+* Finding all apartments associated to a tag
