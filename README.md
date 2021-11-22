@@ -70,19 +70,21 @@ Please reference NYC ERD Roommates pdf
             * *Example: washer-dryer in unit, doorman, roof deck, private backyard, pool, patio off bedroom*
             * **Please seperate amenities with a comma and space as seen above in the example**
     * **Number of Current Roommates**
-        * Add number of roommates that currently live their
+        * Add number of roommates that currently live there
             * *Example: 0 = no roommtes, 1 = 1 roommate, 2 = 2 roommates, 3 = 3 roommates*
             * **Please only add a number to this field. Add 0 if renting/subleasing the entire apartment**
 
-* Hit submit after all information is added. **Please note that all fields are required except for amenities**
+* Hit submit after all information is added. 
+**Please note that all fields are required except for amenities**
 
 * You will then be redirected to a page to add an image. 
     * Click choose file
         * Add the image you wish to associate with your apartment listing
     * Then hit submit
-    **Please note: You must add an image to create listing**
+**Please note: You must add an image to create listing**
 
-* After image is added you will have one more opportunity to update any information from the create a listing page. **Please do not edit the image field**
+* After image is added you will have one more opportunity to update any information from the create a listing page. 
+**Please do not edit the image field**
 
 * After reviewing your listing hit submit. This will take you directely to a page to view the listing you just created with all the information and image rendered.
 
@@ -94,9 +96,9 @@ Please reference NYC ERD Roommates pdf
 **Add Tag Page**
 * This page will render every listing created by the logged in user. Here you will be able to add a tag to any of the listings that you have created. To complete the tag creation hit the submit button.
     **Please note: tags should be one to three words only**
-    * *Example: pet friendly or great for plants or spacious
+    * *Example: pet friendly or great for plants or spacious*
 * You will then be taken to a page to see all your apartments created with the newly added tag.
-        * *Note: you will not be able to see the image on this page*
+    * *Note: you will not be able to see the image on this page*
 
 **Logout**
 * If you are done using the app click logout
@@ -123,8 +125,11 @@ Please reference NYC ERD Roommates pdf
 * Create a profile view
     * The ability to update profile information
     * The ability to delete profile
-* Stretch Goal 3
+* Add a comments section for apartment seekers to express interest in listing
+* Add a favorites for apartment seekers
 
 ## Any Potential Roadblocks
-* Creating a tag by finding an apartment via the association models
+* Finding an apartment and creating a tag to be added to that apartment via the association models
+    * The cotroller/routes for this functionality
 * Finding all apartments associated to a tag
+    * The cotroller/routes for this functionality
