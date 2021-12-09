@@ -3,17 +3,18 @@
         <div class="navbar-header">
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav">
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown"></div>
                     <% if (!currentUser) { %>
                         <li><a href="/auth/login">Login</a></li>
                         <li><a href="/auth/signup">Signup</a></li>
                         <% } else { %>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/apartment">All Listings</a></li>
-                            <li><a href="/apartment/new">Create Listing</a></li>
-                            <li><a href="/tag">View All Tags</a></li>
-                            <li><a href="/tag/new">Add Tag</a></li>
+                            <li><a class="dropdown-item" href="/">Home</a></li>
+                            <li><a  class="dropdown-item" href="/apartment">All Listings</a></li>
+                            <li><a class="dropdown-item" href="/apartment/new">Create Listing</a></li>
+                            <li><a class="dropdown-item" href="/tag">View All Tags</a></li>
+                            <li><a class="dropdown-item" href="/tag/new">Add Tag</a></li>
                             <!-- <li><a href="/profile">Profile</a></li> -->
-                            <li><a href="/auth/logout">Logout</a></li>
+                            <li><a class="dropdown-item" href="/auth/logout">Logout</a></li>
                             <% } %>
                 </ul>
             </div>

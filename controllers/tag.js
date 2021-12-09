@@ -5,6 +5,7 @@ const sequelize = require('sequelize')
 const tag = require('../models/tag')
 const apartment = require('../models/apartment')
 
+
 // GET ALL APARTMENTS BY userId
 router.get('/new', (req, res) => {
   console.log('GET ALL USER APARTMENTS')
@@ -25,28 +26,29 @@ router.get('/new', (req, res) => {
 
 // POST ADD TAG
 router.post('/new', (req, res) => {
-  db.tag.create({
-    name: req.body.name
-  })
-    .then((apartment) => {
-      res.redirect('/tags/show')
-    })
-    .catch((error) => {
-      console.log(error)
+  console.log('happy', req.body.apartmentId)
+  db.apartment.findByPk(req.body.apartmentId)
+    .then(foundApartment => {
+      foundApartment.createTag({
+        name: req.body.name
+      })
+        .then(createTag => {
+          res.redirect('/apartment')
+        })
     })
 })
 
 // GET - VIEW ALL TAGS
 router.get('/', (req, res) => {
+  console.log('TAG PAGE')
   db.tag.findAll()
     .then((tags) => {
       res.render('tags/index', { tags })
     })
     .catch(err => console.log(err))
-  res.status(200).send('Route successful. This is where all tags will go')
 })
 
-// First, get a reference to a apartment.
+// First, get a reference to an apartment
 // router.post('apartments/tags', (req, res) => {
 //   db.apartment.findByPk(req.body.apartmentId)
 //   .then(apartment => {
@@ -59,25 +61,41 @@ router.get('/', (req, res) => {
 // })
 
 
-// // Get ALL APARTMENTS THAT USE A TAG
-// db.tag.findAll({
-//   where: {name: "stinky bear"}
-// }).then(tag => {
-//   toy.getApartments().then(apartments => {
-//     console.log(`${apartments.length} apartment(s) loves the ${tag.name}.`)
+// // Get ALL APARTMENTS BY TAG
+// router.get('/:id', (req, res)=>{
+// console.log('WHERE ARE MY APTTAGS')
+//   db.apartment.findAll({
+//     where: { tag: { [Op.like]: req.query.name}},
+//     include: [db.apartmentTag]
 //   })
+//   .then(apartmentTagFound)
+//   res.render('tags/show', {apartmentTagFound})
+// })
+// .catch((error)=>{
+//   res.status(200).send('no ApartmentTags found', error)
+// }) 
+// => {
+//   db.apartment.findAll({
+//     where: { tag: req.body.name },
+//   })
+//     .then((apartment) => {
+//       console.log('Found tagged apartments', apartment)
+//       res.render('tags/show', { apartment })
+//     })
+//     .cathch((err) => {
+//       console.log('Error! No AptTags!', err)
 // })
 
-// // FIND ALL DATA
-// db.apartment.findAll({
-//   where: {
-//     userId: currentUser.id
-//   },
-//   include: [db.user, db.tag]
-// }).then(apartment => {
-//   aprtment.tags.forEach(tag => {
-//     console.log(`${apartment.user.firstName}'s apartment ${apartment.name} loves their ${tag.name}.`)
-//   })
-// })
-
-module.exports = router
+  // // FIND ALL DATA
+  // db.apartment.findAll({
+  //   where: {
+  //     userId: currentUser.id
+  //   },
+  //   include: [db.user, db.tag]
+  // }).then(apartment => {
+  //   aprtment.tags.forEach(tag => {
+  //     console.log(`${apartment.user.firstName}'s apartment ${apartment.name} loves their ${tag.name}.`)
+  //   })
+  // })
+  
+  module.exports = router

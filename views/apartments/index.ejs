@@ -1,23 +1,20 @@
 <!-- ALL LISTINGS PAGE -->
 <div class="container">
-  <h1>Apartments</h1>
-</div>
-
-<div class="container">
-  <% apartments.forEach(function(apartment) { %>
+  <% apartments.forEach(function(apartment, tag) { %>
     <div class="well">
       <h2>
         <a href="/apartment/<%= apartment.id %>">
           <%= apartment.title %>
             $<%= apartment.rent %>/month
+          </h2>  
+            <h4>
+              <a href="/tag/<%= tag.id %>">
+                <%= tag.name %>
+              </a>
+            </h4>
         </a>
-      </h2>
     </div>
     <% }) %>
 
-      <a href="/auth/signup">Sign Up</a>
-
-      <hr />
-
-      <a href="/">&larr; Back Home</a>
+      <a id="backHome" href="/">&larr; <b>Back Home</b></a>
 </div>

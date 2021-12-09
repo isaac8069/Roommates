@@ -1,24 +1,27 @@
 <!-- SEARCH RESULTS -->
 <div class="container">
-    <h1>SEARCH RESULTS</h1>
-
-
-    <%if(!apartments) {%>
-        <h3>No Results Found</h3>
-        <small>check your spelling and punctuation and try again</small>
-        <%} else {%>
-            <%apartments.forEach(function(apartment) {%>
-                <div>
-                    <h3>
-                        <a href="/apartment/<%=apartment.id%>">
-                            <%=apartment.title%>
-                        </a>
-                        <small>$<%=apartment.rent%></small>
-                        <small>
-                            <%=apartment.location%>
-                        </small>
-                    </h3>
-                    <%})%>
-                </div>
-                <%}%>
+    <h1 class="pageTitle">Search Results</h1>
 </div>
+
+
+<%if(!apartments) {%>
+    <h3>No Results Found</h3>
+    <small>check your spelling and punctuation and try again</small>
+    <%} else {%>
+        <div class="container">
+            <% apartments.forEach(function(apartment) { %>
+                <div class="well">
+                    <h2>
+                        <a href="/apartment/<%= apartment.id %>">
+                            <%= apartment.title %>
+                                $<%= apartment.rent %>/month
+                                    <%=apartment.location%>
+                        </a>
+                    </h2>
+                </div>
+                <% }) %>
+
+                    <a id="backHome" href="/">&larr; <b>Back Home</b></a>
+        </div>
+        <%}%>
+            </div>

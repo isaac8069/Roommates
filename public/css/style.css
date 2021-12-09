@@ -1,4 +1,32 @@
 body {
     width: 100% !important;
+    background: linear-gradient(to right, rgb(94, 94, 165), rgb(172, 165, 160)) !important;
     margin: 0 auto !important;
+    display: grid !important;
+    margin-top: 2rem;
+    grid-template-columns: repeat(4, 6rm);
+}
+
+input {
+    border: 2px solid rgb(18, 22, 32) !important;
+    width: 200px !important;
+    padding: 10px !important;
+  }
+
+  .pageTitle{
+
+  }
+  .container {
+      /* display: flex !important; */
+  }
+
+.container div {
+    /* border: 1px ccc solid !important;
+    padding: 10px !important;
+    justify-content: space-around !important; */
+
+}
+
+#backHome {
+    color:rgb(172, 165, 160);
 }

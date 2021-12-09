@@ -1,6 +1,6 @@
 <!-- CREATE TAGS -->
 <div class="container">
-  <h1>
+  <h1 class="pageTitle">
     <%= currentUser.firstName %>'s Listings
   </h1>
 </div>
@@ -57,13 +57,16 @@
 
       <section id='add' class='container'>
         <div class='form-wrap'>
-          <form action="/tags/show" method="POST">
+          <form action="/tag/new" method="POST">
             <div class="form-group">
               <label for="tag">Tags</label>
-              <input type="text" name="tag" id="tag" class="form-box"
-                placeholder="eg. pet friendly, no smoking, 420 friendly, artist, homebody, no pets, quiet, never home"
+              <input type="text" name="name" id="tag" class="form-box"
+                placeholder="eg. #petfriendly, #nosmoking, #420friendly, #neverhome"
                 values={{tags}}>
             </div>
+            <input type="hidden" name="apartmentId" value="<%= apartment.id %>">
+            <input type="submit" class="btn btn-primary">
+            </form>
 
 
         </div>
@@ -71,6 +74,4 @@
 
     </div>
     <% }) %>
-      <input type="submit" class="btn btn-primary">
-      </form>
 </div>

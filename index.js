@@ -10,7 +10,6 @@ let db = require('./models')
 const cloudinary = require('cloudinary')
 const multer = require('multer')
 const upload = multer({ dest: './uploads/' })
-const axios = require('axios')
 const methodOverride = require('method-override')
 const { Op } = require('sequelize')
 

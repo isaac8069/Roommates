@@ -57,7 +57,6 @@
 
 <% if(apartment.image) {%>
   <div class="container"><img src="<%= apartment.image %>" alt="an image" height="200px"></div>
-
   <form action="/apartment/<%= apartment.id %>?_method=DELETE" method="post">
     <div class="container"><button type="submit" class="btn btn-danger">Delete Listing</button></div>
   </form>

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       models.user.belongsToMany(models.apartment, { through: "userApartment" })
     }
-  };
+  }
   user.init({
     firstName: {
       type: DataTypes.STRING,
@@ -80,7 +80,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'user',
-  });
+  })
 
   user.addHook('beforeCreate', async (pendingUser, options) => {
     await bcrypt.hash(pendingUser.password, 10)
@@ -90,6 +90,6 @@ module.exports = (sequelize, DataTypes) => {
       })
   })
 
-  return user;
+  return user
 
-};
+}

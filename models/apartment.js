@@ -1,7 +1,7 @@
 'use strict';
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class apartment extends Model {
     /**
@@ -14,21 +14,21 @@ module.exports = (sequelize, DataTypes) => {
       models.apartment.belongsToMany(models.user, { through: "userApartment" })
       models.apartment.belongsToMany(models.tag, { through: "apartmentTag" })
     }
-  };
+  }
   apartment.init({
-    title: DataTypes.STRING,
-    description: DataTypes.TEXT,
-    location: DataTypes.STRING,
-    bedrooms: DataTypes.STRING,
-    bathrooms: DataTypes.STRING,
-    amenities: DataTypes.STRING,
-    rent: DataTypes.INTEGER,
-    roommates: DataTypes.STRING,
-    image: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    title: {type: DataTypes.STRING},
+    description: {type: DataTypes.TEXT},
+    location: {type: DataTypes.STRING},
+    bedrooms: {type: DataTypes.STRING},
+    bathrooms: {type: DataTypes.STRING},
+    amenities: {type: DataTypes.STRING},
+    rent: {type: DataTypes.INTEGER},
+    roommates: {type: DataTypes.STRING},
+    image: {type: DataTypes.STRING},
+    userId: {type: DataTypes.INTEGER}
   }, {
     sequelize,
     modelName: 'apartment',
-  });
-  return apartment;
-};
+  })
+  return apartment
+}

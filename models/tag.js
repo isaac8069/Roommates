@@ -1,7 +1,7 @@
 'use strict';
 const {
   Model
-} = require('sequelize');
+} = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
   class tag extends Model {
     /**
@@ -13,13 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.tag.belongsToMany(models.apartment, { through: "apartmentTag" })
     }
-  };
+  }
   tag.init({
-    name: DataTypes.STRING,
-    unique: true,
+    name: {type: DataTypes.STRING,
+      unique: true}
   }, {
     sequelize,
     modelName: 'tag',
-  });
-  return tag;
-};
+  })
+  return tag
+}

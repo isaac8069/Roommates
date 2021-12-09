@@ -13,13 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
     }
-  };
+  }
   userApartment.init({
-    apartmentId: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    apartmentId: {type: DataTypes.INTEGER},
+    userId: {type: DataTypes.INTEGER}
   }, {
     sequelize,
     modelName: 'userApartment',
-  });
+  })
   return userApartment;
-};
+}
