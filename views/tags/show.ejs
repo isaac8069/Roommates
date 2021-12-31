@@ -1,21 +1,9 @@
-<!-- Show ALL USERS LISTINGS WITH ADDED TAGS -->
-<!-- ALL LISTINGS PAGE -->
+<!-- ALL APARTMENTS WITH ASSOCIATED TAG PAGE -->
 <div class="container">
-  <% apartments.forEach(function(apartment, tag) { %>
-    <div class="well">
-      <h2>
-        <a href="/apartment/<%= apartment.id %>">
-          <%= apartment.title %>
-            $<%= apartment.rent %>/month
-          </h2>  
-            <h4>
-              <a href="/tag/<%= tag.id %>">
-                <%= tag.name %>
-              </a>
-            </h4>
-        </a>
-    </div>
-    <% }) %>
-
-      <a id="backHome" href="/">&larr; <b>Back Home</b></a>
-</div>
+  <h1 class="pageTitle">Apartment with Tags</h1>
+ 
+  
+                      <a id="backHome" href="/">&larr; <b>Back Home</b></a>
+         
+        
+              </div>

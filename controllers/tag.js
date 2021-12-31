@@ -4,19 +4,20 @@ const router = express.Router()
 const sequelize = require('sequelize')
 const tag = require('../models/tag')
 const apartment = require('../models/apartment')
+const { HasMany } = require('sequelize')
 
 
 // GET ALL APARTMENTS BY userId
 router.get('/new', (req, res) => {
-  console.log('GET ALL USER APARTMENTS')
+  // console.log('GET ALL USER APARTMENTS')
   const userId = req.user.dataValues.id
-  console.log('CHECK FOR USER', userId)
+  // console.log('CHECK FOR USER', userId)
   db.apartment.findAll({
     where: { userId: userId },
     include: [db.user]
   })
     .then((apartments) => {
-      console.log('IS THIS WORKING', apartments)
+      // console.log('IS THIS WORKING', apartments)
       res.render('tags/new', { apartments })
     })
     .catch((error) => {
@@ -28,12 +29,17 @@ router.get('/new', (req, res) => {
 router.post('/new', (req, res) => {
   console.log('happy', req.body.apartmentId)
   db.apartment.findByPk(req.body.apartmentId)
-    .then(foundApartment => {
-      foundApartment.createTag({
-        name: req.body.name
-      })
-        .then(createTag => {
-          res.redirect('/apartment')
+    .then((foundApartment) => {
+      console.log(req.body.name)
+      db.tag.findOrCreate({ where: { name: req.body.name } })
+        .then(([tag, created]) => {
+          foundApartment.addTag(tag).then(apartmentTag => {
+            console.log(`${tag.name} added to $${foundApartment}.`)
+            // .then( tag => {
+              //   const apartment = req.body
+              res.render('tags/update', {apartment: apartment, tag: tag.name})
+            // })
+          })
         })
     })
 })
@@ -48,18 +54,20 @@ router.get('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
-// First, get a reference to an apartment
-// router.post('apartments/tags', (req, res) => {
-//   db.apartment.findByPk(req.body.apartmentId)
-//   .then(apartment => {
-//     db.tag.findByPk(req.body.apartmentId)
-//     .then(tag => {
-//       apartment.addTag(tag)
-//       res.redirect(/tags/show)
-//     })
-//   })
-// })
-
+// Get all Apartments that use a Tag
+router.get('/:id', (req, res) => {
+  db.tag.findOne({
+    where: { id: req.params.id }
+  }).then(tag => {
+    console.log('TAGSSSS APTMNT', apartment)
+    tag.getApartments().then(apartments => {
+      res.render('tags/show', { apartment: apartment })
+    })
+      .catch((error) => {
+        console.log(error)
+      })
+  })
+})
 
 // // Get ALL APARTMENTS BY TAG
 // router.get('/:id', (req, res)=>{
@@ -86,16 +94,16 @@ router.get('/', (req, res) => {
 //       console.log('Error! No AptTags!', err)
 // })
 
-  // // FIND ALL DATA
-  // db.apartment.findAll({
-  //   where: {
-  //     userId: currentUser.id
-  //   },
-  //   include: [db.user, db.tag]
-  // }).then(apartment => {
-  //   aprtment.tags.forEach(tag => {
-  //     console.log(`${apartment.user.firstName}'s apartment ${apartment.name} loves their ${tag.name}.`)
-  //   })
-  // })
-  
-  module.exports = router
+// // FIND ALL DATA
+// db.apartment.findAll({
+//   where: {
+//     userId: currentUser.id
+//   },
+//   include: [db.user, db.tag]
+// }).then(apartment => {
+//   aprtment.tags.forEach(tag => {
+//     console.log(`${apartment.user.firstName}'s apartment ${apartment.name} loves their ${tag.name}.`)
+//   })
+// })
+
+module.exports = router

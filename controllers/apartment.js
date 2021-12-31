@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 
 // GET FORM to CREATE APARTMENT LISTING
 router.get('/new', (req, res) => {
+  console.log('ROUTE')
   db.apartment.findAll()
     .then((apartment) => {
       res.render('apartments/new', { apartment: apartment })
