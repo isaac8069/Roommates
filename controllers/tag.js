@@ -34,11 +34,10 @@ router.post('/new', (req, res) => {
       db.tag.findOrCreate({ where: { name: req.body.name } })
         .then(([tag, created]) => {
           foundApartment.addTag(tag).then(apartmentTag => {
-            console.log(`${tag.name} added to $${foundApartment}.`)
-            // .then( tag => {
-              //   const apartment = req.body
-              res.render('tags/update', {apartment: apartment, tag: tag.name})
-            // })
+            console.log(``)
+           
+              res.render('tags/update', {foundApartment: foundApartment, apartmentTag: apartmentTag})
+              console.log('TAGGGGG NAME FOUND', tag)
           })
         })
     })
@@ -59,40 +58,19 @@ router.get('/:id', (req, res) => {
   db.tag.findOne({
     where: { id: req.params.id }
   }).then(tag => {
-    console.log('TAGSSSS APTMNT', apartment)
+    console.log('TAGSSSS APTMNT', tag)
+    console.log('FIND TAG NAEM', tag.name)
     tag.getApartments().then(apartments => {
-      res.render('tags/show', { apartment: apartment })
+      console.log('NEXT LEVEL', tag.name)
+      res.render('tags/show', { apartments: apartments, tag: tag })
     })
       .catch((error) => {
         console.log(error)
+        res.send('NO APARTMENTS FOUND')
       })
   })
 })
 
-// // Get ALL APARTMENTS BY TAG
-// router.get('/:id', (req, res)=>{
-// console.log('WHERE ARE MY APTTAGS')
-//   db.apartment.findAll({
-//     where: { tag: { [Op.like]: req.query.name}},
-//     include: [db.apartmentTag]
-//   })
-//   .then(apartmentTagFound)
-//   res.render('tags/show', {apartmentTagFound})
-// })
-// .catch((error)=>{
-//   res.status(200).send('no ApartmentTags found', error)
-// }) 
-// => {
-//   db.apartment.findAll({
-//     where: { tag: req.body.name },
-//   })
-//     .then((apartment) => {
-//       console.log('Found tagged apartments', apartment)
-//       res.render('tags/show', { apartment })
-//     })
-//     .cathch((err) => {
-//       console.log('Error! No AptTags!', err)
-// })
 
 // // FIND ALL DATA
 // db.apartment.findAll({

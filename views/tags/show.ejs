@@ -1,9 +1,23 @@
 <!-- ALL APARTMENTS WITH ASSOCIATED TAG PAGE -->
 <div class="container">
   <h1 class="pageTitle">Apartment with Tags</h1>
- 
-  
-                      <a id="backHome" href="/">&larr; <b>Back Home</b></a>
-         
-        
-              </div>
+
+  <!-- add a for each to show apartments associated to tag -->
+  <div class="container">
+    <ul class="apartmenttag">
+      <% apartments.forEach(function(apartment) { %>
+        <a href="/apartment/<%= apartment.id %>">
+          <%= apartment.title %>
+              $<%= apartment.rent %>/month
+                  <%=apartment.location%>
+                  <%=tag.name%>
+                  <!-- tag is only pulling in as id and not tag name -->
+      </a>
+      <% }); %> 
+     </ul>
+      <a id="backHome" href="/">&larr; <b>Back Home</b></a>
+  </div>
+
+
+
+</div>
