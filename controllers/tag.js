@@ -36,8 +36,8 @@ router.post('/new', (req, res) => {
           foundApartment.addTag(tag).then(apartmentTag => {
             console.log(``)
            
-              res.render('tags/update', {foundApartment: foundApartment, apartmentTag: apartmentTag})
-              console.log('TAGGGGG NAME FOUND', tag)
+              res.render('tags/update', {apartment: foundApartment, tag: tag})
+              console.log('TAGGEDDD APTMNT', tag)
           })
         })
     })

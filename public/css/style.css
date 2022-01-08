@@ -1,6 +1,6 @@
 body {
     width: 100% !important;
-    background: linear-gradient(to right, rgb(94, 94, 165), rgb(172, 165, 160)) !important;
+    background: linear-gradient(to right, rgba(181, 210, 211, 0.886), rgb(172, 165, 160)) !important;
     margin: 0 auto !important;
     display: grid !important;
     margin-top: 2rem;
