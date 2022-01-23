@@ -2,7 +2,7 @@
 
 ## About 
 
-This is a NYC based apartment and roommate seeking app. The purpose of this app is to connect renters and rentees. This app will allow people to post their apartments online with the hopes of finding a roommate or someone to take over their apartment via rent or sublease. It will also allow apartment seekers to find listings and inquire about them via email.
+This is a NYC based apartment app. The purpose of this app is to connect users through the creation of an apartment listing. The users of this app consist of renters and rentees.  
 
 Apartment Renters will be able to create an apartment listing, add an image to the apartment, and add tags to the apartment listing. Apartment seekers will be able to view all apartment listings, search for apartments by location, and use tags (keywords) to find any apartment listing with the associated tag. **Both apartment renter and seeker will need to create an account to access the full app.**
 
