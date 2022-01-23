@@ -1,4 +1,4 @@
-# Apartment Finder
+# Apartment Buddy
 
 ## About 
 
@@ -8,7 +8,7 @@ Apartment Renters will be able to create an apartment listing, add an image to t
 
 ## Tech Stack
 
-Postgres SQL, Node.JS, npm express, JS, EJS, Bootstrap, CSS, RESTful, npm install --save multer, Cloudinary API to upload images to apartment listings, passport, passport-local, method-override, nodemon, sequalize, sequalize-cli, dotenv, bcrypt, connect-flash, pg, express-ejs-layouts, express-session
+PostgreSQL, NodeJS, Express, JavaScript, EJS, Bootstrap, CSS, REST API, Cloudinary API to upload images to apartment listings, passport, passport-local, Sequalize, Sequalize-cli, and bcrypt. 
 
 ## Wireframe
 
